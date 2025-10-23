@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "01PaginaPersonal": {
+    "PaginaPersonal": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -31,7 +31,8 @@
             ],
             "styles": [
               "src/styles.scss"
-            ]
+            ],
+             "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" ]
           },
           "configurations": {
             "production": {
@@ -61,10 +62,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "01PaginaPersonal:build:production"
+              "buildTarget": "PaginaPersonal:build:production"
             },
             "development": {
-              "buildTarget": "01PaginaPersonal:build:development"
+              "buildTarget": "PaginaPersonal:build:development"
             }
           },
           "defaultConfiguration": "development"

@@ -1,0 +1,9 @@
+.card-img-top {
+  width: 100%;
+  height: 220px; // puedes ajustar este valor a tu gusto
+  object-fit: cover; // recorta la imagen sin deformarla
+  border-top-left-radius: 0.5rem; 
+  border-top-right-radius: 0.5rem;
+}
+
+
