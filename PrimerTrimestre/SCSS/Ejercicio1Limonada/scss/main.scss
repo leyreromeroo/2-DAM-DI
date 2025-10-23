@@ -1,0 +1,61 @@
+/* Button Menu */
+@import url(https://fonts.googleapis.com/css?family=Fredoka+One|IM+Fell+English|Montserrat|Sanchez|Rock+Salt);
+@import "base/mixins_funciones";
+@import "base/body";
+
+$colorBotones: #64e0ba;
+$colorBotonesOscuro: darken($colorBotones, 30%);
+$value-px: 10px;
+
+* {
+  box-sizing: border-box;
+}
+
+.buttons {
+  background: url("../images/bg-horizontal-menu.jpg");
+
+  li {
+    display: inline-block;
+  }
+
+  a {
+    display: inline-block;
+    color: #fff;
+    background: $colorBotones;
+
+    padding: px-to-em($value-px) px-to-em($value-px * 1.8);
+    margin: px-to-em($value-px * 1.5) px-to-em($value-px);
+
+    font-family: "Fredoka One", sans-serif;
+    border-radius: px-to-em(20px);
+    box-shadow: 0 px-to-em(8px) 0 0 #4aa185;
+
+    &:hover {
+      background: $colorBotonesOscuro;
+    }
+  }
+}
+
+section {
+  padding: 5rem 0;
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+
+}
+
+
+@import "base/footer";

@@ -1,0 +1,24 @@
+@use "sass:color";
+
+//Colores
+$red: rgb(229, 81, 79);
+$yellow: #e0de64;
+$blue: rgb(18, 171, 231);
+$white: whitesmoke;
+$primary: $yellow;
+$secondary: lighten($blue, 10%);
+$accent: darken($red, 20%);
+$body-bg: $white;
+
+//Tipografía
+$text-color: black;
+$font-size-base: 1.2rem;
+$font-size-lg: $font-size-base * 1.25;
+
+//Bordes
+$border-bottom-color: darken($secondary, 10%);
+$border-radius: .5rem;
+
+//Paddings
+$padding-x: 0.5em;
+$padding-y: 0.5em;

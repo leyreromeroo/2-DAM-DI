@@ -1,0 +1,31 @@
+
+.navbar {
+    background-color: $primary;
+
+    .navbar-list{
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        @include gradient-bg($primary, $secondary);
+        
+        .navbar-list-item{
+            display: inline-block;
+            font-family: 'Sanchez';
+            font-size:  $font-size-base * 0.8;
+            $navbar-padding-x: $padding-x + 5;
+            $navbar-padding-y: $padding-y;
+            @include padding-xy($navbar-padding-x, $navbar-padding-y);
+
+            a{
+                color: $accent;
+                &:hover{
+                font-size: $font-size-lg;
+                }
+            }
+            
+        }
+    }
+} 
+

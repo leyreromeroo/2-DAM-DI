@@ -1,0 +1,44 @@
+main {
+  width: 100%;
+  padding-right: $padding-x;
+  padding-left: $padding-x;
+  margin-right: auto;
+  margin-left: auto;
+
+  .base {
+    color: $text-color;
+    font-size: $font-size-lg * 0.9; //Probar con . y ,
+    width: 90%;
+    background-color: lighten($body-bg, 10%);
+  }
+
+  .contenedor {
+    @extend .base;
+    background-color: $primary;
+    margin: auto;
+  }
+  .subcontenedor {
+    @extend .contenedor;
+    font-size: $font-size-lg * 0.7; //Probar con . y ,
+    @include padding-xy($padding-x, $padding-y);
+  }
+  .seccion_articulo {
+    @extend .navbar;
+    border: $border-radius solid $border-bottom-color;
+    color: $text-color;
+    box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.2);
+    margin: 0 3rem 0 3rem;
+
+    img {
+      @include padding-xy($padding-x, $padding-y);
+      font-size: $font-size-base;
+    }
+
+    .seccion__articulo-titulo {
+      font-size: $font-size-base;
+    }
+    .seccion__articulo-cuerpo {
+      font-size: $font-size-base * 0.5;
+    }
+  }
+}

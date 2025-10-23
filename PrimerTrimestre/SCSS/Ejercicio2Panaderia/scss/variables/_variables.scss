@@ -1,0 +1,23 @@
+@use "sass:color";
+
+//Colores
+$red: rgb(229, 81, 79);
+$green: #64e06c;
+$blue: rgb(18, 210, 231);
+$white: oldlace;
+$primary: $green;
+$secondary: lighten($blue, 10%);
+$accent: darken($red, 20%);
+
+//Tipografía
+$color: black;
+$font-size-base: 1.2rem;
+$font-size-lg: $font-size-base * 1.01;
+
+//Bordes
+$border-bottom-color: lighten($secondary, 20%);
+$border-radius: .5rem;
+
+//Paddings
+$padding-x: .5rem;
+$padding-y: -5rem;

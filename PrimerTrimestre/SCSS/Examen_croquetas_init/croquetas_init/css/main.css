@@ -1,0 +1,104 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: whitesmoke;
+}
+html section {
+  padding: 5rem 0;
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+html a {
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+html ul {
+  list-style-type: none;
+}
+
+.navbar, main .seccion_articulo {
+  background-color: #e0de64;
+}
+.navbar .navbar-list, main .seccion_articulo .navbar-list {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #e0de64 0%, rgb(60.1807228916, 189.2168674699, 239.8192771084) 100%);
+}
+.navbar .navbar-list .navbar-list-item, main .seccion_articulo .navbar-list .navbar-list-item {
+  display: inline-block;
+  font-size: 1.32rem;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 0.7em;
+  padding-bottom: 0.7em;
+}
+.navbar .navbar-list .navbar-list-item img, main .seccion_articulo .navbar-list .navbar-list-item img {
+  width: 70%;
+  height: auto;
+}
+.navbar .navbar-list .navbar-list-item:hover, main .seccion_articulo .navbar-list .navbar-list-item:hover {
+  font-size: 1.5rem;
+}
+.navbar .navbar-list .navbar-list-item:hover a, main .seccion_articulo .navbar-list .navbar-list-item:hover a {
+  color: rgb(179.4851485149, 28.5544554455, 26.5148514851);
+}
+
+main {
+  width: 100%;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+  margin-right: auto;
+  margin-left: auto;
+}
+main .base, main .contenedor, main .subcontenedor {
+  color: black;
+  font-size: 1.35rem;
+  width: 90%;
+  background-color: white;
+}
+main .contenedor, main .subcontenedor {
+  background-color: #e0de64;
+  margin: auto;
+}
+main .subcontenedor {
+  font-size: 1.05rem;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+main .seccion_articulo {
+  border: 0.5rem solid #12abe7;
+  color: black;
+  box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.2);
+  margin: 0 3rem 0 3rem;
+}
+main .seccion_articulo img {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  font-size: 1.2rem;
+}
+main .seccion_articulo .seccion__articulo-titulo {
+  font-size: 1.2rem;
+}
+main .seccion_articulo .seccion__articulo-cuerpo {
+  font-size: 0.6rem;
+}
+
+footer {
+  bottom: 0;
+  text-align: center;
+}
+
+/*# sourceMappingURL=main.css.map */

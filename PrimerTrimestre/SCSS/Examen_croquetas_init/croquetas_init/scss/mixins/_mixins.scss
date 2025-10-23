@@ -1,0 +1,15 @@
+@mixin padding-xy($padding-x, $padding-y) {
+    padding-left: $padding-x;
+    padding-right: $padding-x;
+    padding-top: $padding-y;
+    padding-bottom: $padding-y;
+}
+
+@function gradient-bg($color1, $color2:null) {
+    @if($color2 != null){
+         @return linear-gradient(90deg, $color1 0%, $color2 100%);
+    } @else {
+         @return $color1;
+    }
+}
+   

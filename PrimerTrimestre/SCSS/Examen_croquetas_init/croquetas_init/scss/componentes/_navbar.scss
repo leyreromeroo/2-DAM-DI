@@ -1,0 +1,30 @@
+.navbar {
+  background-color: $primary;
+
+  .navbar-list {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    background: gradient-bg($primary, $secondary);
+
+    .navbar-list-item {
+      display: inline-block;
+      font-size: $font-size-base * 1.1;
+      $navbar-padding-x: $padding-x + 0.5;
+      $navbar-padding-y: $padding-y + 0.2;
+      @include padding-xy($navbar-padding-x, $navbar-padding-y);
+      img{
+        width: 70%;
+        height: auto;
+      }
+      &:hover {
+        font-size: $font-size-lg;
+        a {
+            color: $accent;
+        }
+      }
+    }
+  }
+}

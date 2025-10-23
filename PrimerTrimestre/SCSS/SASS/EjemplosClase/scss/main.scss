@@ -1,0 +1,56 @@
+/*$micolor: #00c4c7;
+h2 {
+ color: $micolor;
+}
+
+footer {
+ background-color: #00CDD1;
+ color: white;
+ clear: both;
+ border-top: 1px solid #00CDD1;
+ p {
+ text-align: center;
+ }
+ img {
+ width: 52px;
+ }
+ a {
+ color: white;
+ text-decoration: none;
+ }
+}
+
+$mimargen: 1.999em;
+h1 {
+ font-size: round(1.8 * 16px);
+ padding: ceil(1.2em); // 2em
+ margin: floor($mimargen); // 1em
+ border-bottom: (random(10) + px) dotted #c80060;
+}
+
+//Mixins con parámetros: Son como funciones
+//Se definen con @mixin y se incluyen con @include, y se usan para dar estilos repetitivos que se puedan cambiar (ej: con colores diferentes) 
+$primary-color : #00c4c7;
+$secondary-color : #c80060;
+@mixin std-heading {
+ color: white;
+ font-weight: normal;
+ font-family: Georgia, serif;
+ font-style: italic;
+}
+h1,
+h3,
+h5 {
+ @include std-heading;
+ background-color : $primary-color ;
+}
+h2,
+h4 {
+ @include std-heading;
+ background-color : $secondary-color ;
+}*/
+
+
+@import "base/mixins_funciones.scss";
+@import "base/variables.scss";
+@import "componentes/botones";

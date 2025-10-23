@@ -1,0 +1,83 @@
+/* Button Menu */
+@import url(https://fonts.googleapis.com/css?family=Fredoka+One|IM+Fell+English|Montserrat|Sanchez|Rock+Salt);
+@import url(https://fonts.googleapis.com/css?family=Pacifico);
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+main {
+  background-color: #aab645;
+}
+main h1 {
+  font-family: "Roboto";
+  text-align: center;
+  background-color: #8f9a2d;
+}
+main .banner {
+  font-family: "Pacifico";
+  text-align: center;
+  height: 2em;
+  background-color: #b4c238;
+}
+main .container {
+  font-family: "Pacifico";
+  text-align: center;
+  text-align: center;
+  background-color: rgba(180, 194, 56, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.buttons {
+  background: url("../images/bg-horizontal-menu.jpg");
+}
+.buttons li {
+  display: inline-block;
+}
+.buttons a {
+  display: inline-block;
+  color: #fff;
+  background: #64e0ba;
+  padding: 0.625em 1.125em;
+  margin: 0.9375em 0.625em;
+  font-family: "Fredoka One", sans-serif;
+  border-radius: 1.25em;
+  box-shadow: 0 0.5em 0 0 #4aa185;
+}
+.buttons a:hover {
+  background: rgb(28.5, 142.5, 107.564516129);
+}
+
+section, footer {
+  padding: 5rem 0;
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+section a, footer a {
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+section ul, footer ul {
+  list-style-type: none;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  background: url("../images/bg-horizontal-menu.jpg");
+}
+
+/*footer{
+@extend section;
+position: fixed;
+bottom: 0;
+background: url('../images/bg-horizontal-menu.jpg');
+font-style: normal;
+
+}
+*/
+
+/*# sourceMappingURL=main.css.map */

@@ -1,0 +1,40 @@
+main {
+  width: 100%;
+  padding-right: El valor de la variable padding-x;
+  padding-left: El valor de la variable padding-x;
+  margin-right: auto;
+  margin-left: auto;
+
+  .portada {
+    color: $color;
+    font-size: $font-size-lg;
+    width: 90%;
+    font-family: "Montserrat";
+    background-color: lighten($border-bottom-color, 10%);
+  }
+
+  .contenedor {
+    @extend .portada;
+    margin: auto;
+  }
+  .subcontenedor {
+    font-size: $font-size-lg * 0, 7;
+    @include padding-xy($padding-x, $padding-y);
+  }
+  .seccion_articulo {
+    @extend .navbar;
+    font-family: "Montserrat";
+    border: $border-radius solid $border-bottom-color;
+    color: $color;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 0 3rem 0 3rem;
+
+    img {
+      font-size: $font-size-base;
+    }
+
+    .seccion__articulo-cuerpo {
+      font-size: $font-size-base * 0.7;
+    }
+  }
+}

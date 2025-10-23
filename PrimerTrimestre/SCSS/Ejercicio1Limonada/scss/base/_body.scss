@@ -1,0 +1,22 @@
+@import url(https://fonts.googleapis.com/css?family=Pacifico);
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import "./mixins_funciones";
+
+main {
+background-color: #aab645;
+    h1 {
+    @include definir-font-y-alineacion("Roboto", center);
+    background-color: #8f9a2d;
+    }
+    .banner {
+    @include definir-font-y-alineacion("Pacifico", center);
+    height: 2em;
+    background-color: #b4c238;
+    }
+    .container {
+    @include definir-font-y-alineacion("Pacifico", center);
+    text-align: center;
+    background-color: rgba(180, 194, 56, 0.5);
+    }
+}
+

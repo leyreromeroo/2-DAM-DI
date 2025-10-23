@@ -1,0 +1,10 @@
+// px a em: 16px es 1 em.
+
+@function  px-to-em($px, $context: 16px) {
+  @return ($px / $context) * 1em;
+}
+
+@mixin definir-font-y-alineacion($font, $align) {
+  font-family: $font;
+  text-align: $align;
+}

@@ -1,0 +1,99 @@
+* {
+  box-sizing: border-box;
+  font-family: "Montserrat";
+}
+
+html {
+  background-color: #caedfb;
+}
+html section {
+  padding: 5rem 0;
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+html a {
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+html ul {
+  list-style-type: none;
+}
+
+.navbar, main .seccion_articulo {
+  background-color: #64e06c;
+}
+.navbar .navbar-list, main .seccion_articulo .navbar-list {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #64e06c;
+  background: linear-gradient(90deg, #64e06c 0%, rgb(60.1807228916, 222.1084337349, 239.8192771084) 100%);
+}
+.navbar .navbar-list .navbar-list-item, main .seccion_articulo .navbar-list .navbar-list-item {
+  display: inline-block;
+  font-family: "Sanchez";
+  font-size: 0.96rem;
+  padding-left: 5.5rem;
+  padding-right: 5.5rem;
+  padding-top: -5rem;
+  padding-bottom: -5rem;
+}
+.navbar .navbar-list .navbar-list-item a, main .seccion_articulo .navbar-list .navbar-list-item a {
+  color: rgb(179.4851485149, 28.5544554455, 26.5148514851);
+}
+.navbar .navbar-list .navbar-list-item a:hover, main .seccion_articulo .navbar-list .navbar-list-item a:hover {
+  font-size: 1.212rem;
+}
+
+main {
+  width: 100%;
+  padding-right: El valor de la variable padding-x;
+  padding-left: El valor de la variable padding-x;
+  margin-right: auto;
+  margin-left: auto;
+}
+main .portada, main .contenedor {
+  color: black;
+  font-size: 1.212rem;
+  width: 90%;
+  font-family: "Montserrat";
+  background-color: rgb(202.1204819277, 246.0722891566, 250.8795180723);
+}
+main .contenedor {
+  margin: auto;
+}
+main .subcontenedor {
+  font-size: 0rem, 7;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: -5rem;
+  padding-bottom: -5rem;
+}
+main .seccion_articulo {
+  font-family: "Montserrat";
+  border: 0.5rem solid rgb(154.8072289157, 238.0843373494, 247.1927710843);
+  color: black;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 0 3rem 0 3rem;
+}
+main .seccion_articulo img {
+  font-size: 1.2rem;
+}
+main .seccion_articulo .seccion__articulo-cuerpo {
+  font-size: 0.84rem;
+}
+
+footer {
+  font-family: "Rock Salt";
+  position: sticky;
+  bottom: 0;
+  text-align: center;
+}
+
+/*# sourceMappingURL=style.css.map */
