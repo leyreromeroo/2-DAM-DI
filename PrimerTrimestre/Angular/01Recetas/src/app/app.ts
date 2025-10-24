@@ -1,5 +1,4 @@
 import { Component, signal } from '@angular/core';
-import { Profile } from "./profile/profile";
 import { Recetas } from './recetas/recetas';
 import { NuevaReceta } from "./nueva-receta/nueva-receta";
 import { Navbar } from "./navbar/navbar";

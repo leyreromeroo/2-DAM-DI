@@ -1,8 +1,24 @@
 <div class="container-fluid">
+
     <div class="row">
         <div class="col-6">
-            <p class="display-1" [hidden]="esOculto()">{{title}}</p>
+            @if(!esOculto()){
+                <p class="display-1">{{title}}</p>
+            }
+            <!--<p class="display-1" [hidden]="esOculto()">{{title}}</p>-->
             <button class="btn btn-primary" (click)="toggleName()">{{titleBoton()}}</button>
         </div>
+        <div class="col-6">
+            <!-- Ponemos en el evento padre () la variable del output del hijo y la función del padre que recoje la del hijo -->
+             <!-- Recorremos ael array y mostramos als fotos-->
+            <app-foto-personal [title]="titlePhoto" [srcImage]="srcPhoto" (clickFoto)="ensenarClick($event)"> </app-foto-personal>
+            <p class="lead text-center">{{imagenClickeada}}</p>
+        </div>
+        <div class="row">
+            @for (photo of photos; track $index) {
+                <div class="col-6 mb-3">
+                    <app-foto-personal [title]="photo.nombre" [srcImage]="photo.foto" (clickFoto)="ensenarClick($event)"> </app-foto-personal>
+                </div>
+            }
+        </div>
     </div>
-</div>
