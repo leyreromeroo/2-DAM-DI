@@ -1,12 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
+import { FormControl, ReactiveFormsModule, FormGroup, Validators} from '@angular/forms' ;
 
 @Component({
   selector: 'app-nueva-receta',
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './nueva-receta.html',
   styleUrl: './nueva-receta.scss'
 })
 export class NuevaReceta {
+  contador = 5;
+
+  nuevaRecetaForm = new FormGroup({
+  id: new FormControl('R' + (++this.contador)),
+  titulo: new FormControl('', Validators.required),
+  foto: new FormControl('', Validators.required),
+  ingredientes: new FormControl('', Validators.required)
+  });
+ 
   imagenPreview: string | ArrayBuffer | null = null;
 
   onFileSelected(event: any): void {
@@ -29,9 +39,11 @@ export class NuevaReceta {
       return;
     }
 
-    console.log('Receta creada:', { titulo, ingredientes, imagen: this.imagenPreview });
+    @Output() nuevaRecetaForm
+
     alert('¡Receta creada con éxito!');
     form.reset();
+    this.nuevaRecetaForm.reset();
     this.imagenPreview = null;
   }
 }

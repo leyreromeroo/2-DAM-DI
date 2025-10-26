@@ -1,0 +1,25 @@
+.card-img-top {
+  width: 100%;
+  height: 220px; // puedes ajustar este valor a tu gusto
+  object-fit: cover; // recorta la imagen sin deformarla
+  border-top-left-radius: 0.5rem; 
+  border-top-right-radius: 0.5rem;
+}
+
+.eliminar-btn {
+  width: 30px;
+  height: 30px;
+  font-size: 1.2rem;
+  line-height: 0.9; /* ajusta verticalmente el símbolo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: transform 0.2s ease-in-out, background-color 0.2s;
+}
+
+.eliminar-btn:hover {
+  transform: scale(1.1);
+  background-color: #bb2d3b; /* tono más oscuro del rojo Bootstrap */
+}
+

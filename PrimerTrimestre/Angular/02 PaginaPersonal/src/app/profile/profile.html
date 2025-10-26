@@ -6,7 +6,7 @@
                 <p class="display-1">{{title}}</p>
             }
             <!--<p class="display-1" [hidden]="esOculto()">{{title}}</p>-->
-            <button class="btn btn-primary" (click)="toggleName()">{{titleBoton()}}</button>
+            <button class="btn btn-primary" (click)="toggleName()">{{titleBoton() | uppercase}}</button>
         </div>
         <div class="col-6">
             <!-- Ponemos en el evento padre () la variable del output del hijo y la función del padre que recoje la del hijo -->

@@ -1,0 +1,21 @@
+<div class="card h-100 position-relative">
+  <button 
+    (click)="onEliminarReceta()" 
+    class="btn btn-danger btn-sm rounded-circle position-absolute top-0 end-0 translate-middle me-0 mt-4 shadow-sm eliminar-btn"
+    title="Eliminar receta">
+    &times;
+  </button>
+
+  <img [src]="recetaModel.foto" class="card-img-top" [alt]="recetaModel.titulo">
+  <div class="card-body d-flex flex-column">
+    <h5 class="card-title">{{ recetaModel.titulo }}</h5>
+    <p class="card-text">
+      Ingredientes:<br>
+      @for (ingrediente of recetaModel.ingredientes; track $index)
+        {
+        - {{ ingrediente }}<br>
+      }
+        
+    </p>
+  </div>
+</div>

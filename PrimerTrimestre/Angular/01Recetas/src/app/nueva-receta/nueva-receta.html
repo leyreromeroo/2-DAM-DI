@@ -1,15 +1,9 @@
-
-<form class="row g-3 needs-validation mb-5" novalidate (submit)="onSubmit($event)">
+<form  [formGroup]="nuevaRecetaForm" class="row g-3 needs-validation mb-5" (ngSubmit)="onSubmit($event)">
   <h2>Nueva Receta</h2>
   <!-- Campo: Título -->
   <div class="col-12 position-relative">
     <label for="titulo" class="form-label">Título</label>
-    <input
-      type="text"
-      class="form-control"
-      id="titulo"
-      name="titulo"
-      required
+    <input type="text" class="form-control" id="titulo" name="titulo" required
       placeholder="Ej: Ensalada de quinoa con aguacate">
     <div class="invalid-feedback">
       Por favor, introduce un título.
@@ -19,12 +13,7 @@
   <!-- Campo: Ingredientes -->
   <div class="col-12 position-relative">
     <label for="ingredientes" class="form-label">Ingredientes</label>
-    <textarea
-      class="form-control"
-      id="ingredientes"
-      name="ingredientes"
-      rows="4"
-      required
+    <textarea class="form-control" id="ingredientes" name="ingredientes" rows="4" required
       placeholder="Ej: quinoa, aguacate, tomate cherry, limón..."></textarea>
     <div class="invalid-feedback">
       Escribe los ingredientes.
@@ -34,13 +23,7 @@
   <!-- Campo: Imagen -->
   <div class="col-12 position-relative">
     <label for="imagen" class="form-label">Imagen</label>
-    <input
-      type="file"
-      class="form-control"
-      id="imagen"
-      name="imagen"
-      accept="image/*"
-      (change)="onFileSelected($event)"
+    <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" (change)="onFileSelected($event)"
       required>
     <div class="invalid-feedback">
       Por favor, selecciona una imagen.
@@ -48,9 +31,13 @@
   </div>
 
   <!-- Vista previa -->
-  <div class="col-12" *ngIf="imagenPreview">
+  @if (imagenPreview)
+  {
+  <div class="col-12">
     <label class="form-label">Vista previa:</label>
     <img [src]="imagenPreview" class="img-fluid rounded border" style="max-height: 200px;" alt="Vista previa">
   </div>
+  }
+
 
 </form>
