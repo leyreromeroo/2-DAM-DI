@@ -1,11 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { Recetas } from './recetas/recetas';
 import { Navbar } from "./navbar/navbar";
-import { NuevaReceta } from './nueva-receta/nueva-receta';
 
 @Component({
   selector: 'app-root',
-  imports: [Recetas, Navbar, NuevaReceta],
+  imports: [Recetas, Navbar],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

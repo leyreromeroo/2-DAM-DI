@@ -1,43 +1,63 @@
-<form  [formGroup]="nuevaRecetaForm" class="row g-3 needs-validation mb-5" (ngSubmit)="onSubmit($event)">
-  <h2>Nueva Receta</h2>
-  <!-- Campo: Título -->
-  <div class="col-12 position-relative">
-    <label for="titulo" class="form-label">Título</label>
-    <input type="text" class="form-control" id="titulo" name="titulo" required
-      placeholder="Ej: Ensalada de quinoa con aguacate">
-    <div class="invalid-feedback">
-      Por favor, introduce un título.
+<!-- Lo ponemos en el mismo html del componente -->
+<div class="modal fade" id="crearRecetaModal" tabindex="-1" aria-labelledby="crearRecetaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="crearRecetaLabel">Crear Receta</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Aquí va el formulario -->
+                <form [formGroup]="nuevaRecetaForm" class="row g-3 needs-validation mb-5" (ngSubmit)="onSubmit()">
+                    <h2>Nueva Receta</h2>
+
+                    <div class="col-12 position-relative">
+                        <label for="titulo" class="form-label">Título</label>
+                        <input type="text" class="form-control" id="titulo" formControlName="titulo"
+                            placeholder="Ej: Ensalada de quinoa con aguacate" required>
+                        <div class="invalid-feedback">
+                            Por favor, introduce un título.
+                        </div>
+                    </div>
+
+                    <div class="col-12 position-relative">
+                        <label for="ingredientes" class="form-label">Ingredientes</label>
+                        <textarea class="form-control" id="ingredientes" rows="4" formControlName="ingredientes"
+                            placeholder="Ej: quinoa, aguacate, tomate cherry, limón..." required></textarea>
+                        <div class="invalid-feedback">
+                            Escribe los ingredientes.
+                        </div>
+                    </div>
+
+                    <div class="col-12 position-relative">
+                        <label for="foto" class="form-label">Imagen</label>
+                        <input type="file" class="form-control" id="foto" accept="image/*"
+                            (change)="onFileSelected($event)" required>
+                        <div class="invalid-feedback">
+                            Por favor, selecciona una imagen.
+                        </div>
+                    </div>
+
+                    @if (imagenPreview) {
+                    <div class="col-12">
+                        <label class="form-label">Vista previa:</label><br><br>
+                        <img [src]="imagenPreview" class="img-fluid rounded border" style="max-height: 200px;"
+                            alt="Vista previa">
+                    </div>
+                    }
+
+                    <div class="col-12">
+                        <button type="submit" class="btn btn btn-light" [disabled]="nuevaRecetaForm.invalid"
+                            data-bs-dismiss="modal">
+                            Guardar Receta
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+            <!--<div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Guardar Receta</button>
+                    </div>-->
+        </div>
     </div>
-  </div>
-
-  <!-- Campo: Ingredientes -->
-  <div class="col-12 position-relative">
-    <label for="ingredientes" class="form-label">Ingredientes</label>
-    <textarea class="form-control" id="ingredientes" name="ingredientes" rows="4" required
-      placeholder="Ej: quinoa, aguacate, tomate cherry, limón..."></textarea>
-    <div class="invalid-feedback">
-      Escribe los ingredientes.
-    </div>
-  </div>
-
-  <!-- Campo: Imagen -->
-  <div class="col-12 position-relative">
-    <label for="imagen" class="form-label">Imagen</label>
-    <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" (change)="onFileSelected($event)"
-      required>
-    <div class="invalid-feedback">
-      Por favor, selecciona una imagen.
-    </div>
-  </div>
-
-  <!-- Vista previa -->
-  @if (imagenPreview)
-  {
-  <div class="col-12">
-    <label class="form-label">Vista previa:</label>
-    <img [src]="imagenPreview" class="img-fluid rounded border" style="max-height: 200px;" alt="Vista previa">
-  </div>
-  }
-
-
-</form>
+</div>
