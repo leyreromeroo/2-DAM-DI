@@ -1,26 +1,38 @@
-.card-img-top {
-  width: 100%;
-  height: 400px; 
-  object-fit: cover; 
-  border-top-left-radius: 0.5rem; 
-  border-top-right-radius: 0.5rem;
-}
-
-.eliminar-btn {
-  width: 30px;
-  height: 30px;
-  font-size: 1.2rem;
-  line-height: 0.9; /* ajusta verticalmente el símbolo */
+.card {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  padding-bottom: 1px; /* ajusta verticalmente el símbolo */
-  transition: transform 0.2s ease-in-out, background-color 0.2s;
-}
+  flex-direction: column;
+  height: 100%;
+  min-height: 600px;
 
-.eliminar-btn:hover {
-  transform: scale(1.1);
-  background-color: #bb2d3b; /* tono más oscuro del rojo Bootstrap */
-}
+  &-img-top {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+  }
 
+  &-body {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+  }
+
+  .eliminar-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+    line-height: 0.9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    padding-bottom: 1px;
+    transition: transform 0.2s ease-in-out, background-color 0.2s;
+
+    &:hover {
+      transform: scale(1.1);
+      background-color: #bb2d3b;
+    }
+  }
+}
