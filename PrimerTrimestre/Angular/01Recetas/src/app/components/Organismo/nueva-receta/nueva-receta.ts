@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter} from '@angular/core';
 import { FormControl, ReactiveFormsModule, FormGroup, Validators} from '@angular/forms' ;
-import { RecetaModel } from '../models/recetaModel';
+import { RecetaModel } from '../../../models/recetaModel';
 
 
 @Component({

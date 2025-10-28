@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
-import { Recetas } from './recetas/recetas';
-import { Navbar } from "./navbar/navbar";
-import { Footer } from "./footer/footer";
+import { Recetas } from './components/Pagina/recetas/recetas';
+import { Navbar } from "./components/Organismo/navbar/navbar";
+import { Footer } from "./components/Organismo/footer/footer";
 
 @Component({
   selector: 'app-root',

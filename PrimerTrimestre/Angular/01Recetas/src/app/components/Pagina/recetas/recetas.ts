@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { RecetaModel } from '../models/recetaModel';
-import { Receta } from '../receta/receta';
-import { NuevaReceta } from '../nueva-receta/nueva-receta';
+import { RecetaModel } from '../../../models/recetaModel';
+import { Receta } from '../../Molecula/receta/receta';
+import { NuevaReceta } from '../../Organismo/nueva-receta/nueva-receta';
 
 @Component({
   selector: 'app-recetas',

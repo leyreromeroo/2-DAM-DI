@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, input, Output, output } from '@angular/core';
-import { RecetaModel } from '../models/recetaModel';
+import { RecetaModel } from '../../../models/recetaModel';
 import { CommonModule } from '@angular/common';
 
 @Component({
