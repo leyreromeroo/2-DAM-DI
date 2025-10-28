@@ -10,18 +10,11 @@ import { CommonModule } from '@angular/common';
 })
 export class Receta {
   
-  //title = input.required<string>();
-  //srcImage = input('default.jpg');//El input se bindea con {{ }} en el html ya que es texto
-  //ingredientes = input<string>();//El input se bindea con {{ }} en el html ya que es texto
-  @Input() recetaModel!: RecetaModel;//Recibo la receta del componente padre
+  @Input() recetaModel!: RecetaModel;
 
-  @Output() clickEliminarReceta: EventEmitter<string> = new EventEmitter<string>();//Creación de eventos entre componentes
-
+  @Output() clickEliminarReceta: EventEmitter<string> = new EventEmitter<string>();
 
   onEliminarReceta() {
-    //Aquí hago la función de eliminar la receta
-    this.clickEliminarReceta.emit(this.recetaModel.id);//Emito el evento con el mensaje
-    //El componente padre (profile) escuchará este evento y mostrará el mensaje en consola
-    //Bindeo el putput en el componente padre en () ya que es un evento
+    this.clickEliminarReceta.emit(this.recetaModel.id);
   }
 }

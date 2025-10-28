@@ -1,0 +1,22 @@
+
+//Colores de los iconos sociales y efectos hover/active
+$social-icon-color: #6c757d; 
+$hover-color: #ff6347;       
+
+.footer {
+    .d-flex.justify-content-center {
+        a {
+            color: $social-icon-color !important; 
+            transition: color 0.3s ease, transform 0.3s ease; 
+
+            &:hover {
+                color: $hover-color !important; 
+                transform: scale(1.1); 
+            }
+            
+            &:active {
+                transform: scale(0.95);
+            }
+        }
+    }
+}

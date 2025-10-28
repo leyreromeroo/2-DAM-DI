@@ -10,21 +10,18 @@ import { RecetaModel } from '../models/recetaModel';
   styleUrl: './nueva-receta.scss'
 })
 export class NuevaReceta {
-  // El contador debería estar en el servicio/padre, pero lo mantenemos aquí por el momento
   private contador: number = 5; 
 
-  // Definición del FormGroup: Los tipos de los valores deben coincidir con lo que el FormControl maneja
   nuevaRecetaForm = new FormGroup({
-    id: new FormControl<string>(''), // El ID se llena justo antes de emitir
+    id: new FormControl<string>(''), 
     titulo: new FormControl('', Validators.required),
     // Usamos string|ArrayBuffer|null porque File Reader devuelve esto
     foto: new FormControl<string | ArrayBuffer | null>(null, Validators.required), 
-    // Usamos string porque es el tipo del input/textarea del formulario
     ingredientes: new FormControl('', Validators.required) 
   });
 
   imagenPreview: string | ArrayBuffer | null = null;
-  // En NuevaReceta.ts:
+
   @Output() recetaCreada = new EventEmitter<RecetaModel>();
 
   onFileSelected(event: any): void {
@@ -34,7 +31,6 @@ export class NuevaReceta {
       
       reader.onload = () => {
         this.imagenPreview = reader.result;
-        // 🔑 CLAVE: Actualizar el valor del FormControl 'foto'
         this.nuevaRecetaForm.controls.foto.setValue(reader.result as string);
       };
       reader.readAsDataURL(file);
@@ -52,13 +48,10 @@ export class NuevaReceta {
       this.nuevaRecetaForm.markAllAsTouched();
       return;
     }
-
-    // --- 🔑 TRANSFORMACIÓN DE DATOS CLAVE ---
     
-    // 1. Generar ID y actualizar el control (aunque no es estrictamente necesario)
+    // 1. Generar ID y actualizar el control 
     this.contador++;
     const nuevoId = 'R' + this.contador;
-    // this.nuevaRecetaForm.controls.id.setValue(nuevoId); // Opcional, pero bueno para depuración
 
     // 2. Obtener los valores crudos del formulario
     const formValues = this.nuevaRecetaForm.value;
@@ -67,18 +60,17 @@ export class NuevaReceta {
     const nuevaReceta: RecetaModel = {
       id: nuevoId,
       titulo: formValues.titulo!,
-      foto: formValues.foto as string, // La foto ya tiene la Base64/URL
-      // 🔑 CONVERSIÓN DE STRING A ARRAY: Clave para cumplir el modelo
+      foto: formValues.foto as string, 
+  
       ingredientes: (formValues.ingredientes ?? '')
-        .split('\n') // Separar por saltos de línea
-        .map(i => i.trim()) // Limpiar espacios
-        .filter(i => i.length > 0) // Quitar líneas vacías
+        .split(/[\n,]+/)
+        .map(i => i.trim()) 
+        .filter(i => i.length > 0) 
     };
 
-    // 4. Emitir la receta completa (la clase RecetaModel) al padre
     this.recetaCreada.emit(nuevaReceta);
 
-    alert(`¡Receta "${nuevaReceta.titulo}" creada con éxito! ID: ${nuevoId}`);
+    console.log(`¡Receta "${nuevaReceta.titulo}" creada con éxito! ID: ${nuevoId}`);
     
     this.nuevaRecetaForm.reset();
     this.imagenPreview = null;
