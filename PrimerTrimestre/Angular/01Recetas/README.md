@@ -62,6 +62,18 @@ La aplicación Recetas de Leyre permite a los usuarios ver, crear y eliminar rec
 3. **Eliminar una Receta**:
    - Cada tarjeta de receta tiene un botón "Eliminar receta" que permite borrar la receta correspondiente de la lista.
 
+## Estructura de Componentes
+
+La organización de los componentes dentro de la carpeta `src/app/components/` se basa en la complejidad y la función de cada elemento, siguiendo un patrón modular similar al Atomic Design.
+
+| Carpeta | Descripción | Ejemplos |
+| :--- | :--- | :--- |
+| **Molecula** | Componentes de tamaño medio que combinan varios elementos (o "átomos") para formar una unidad funcional coherente. | `receta` (El componente que muestra los detalles de una receta individual). |
+| **Organismo** | Secciones complejas de la interfaz que agrupan varias Moléculas. Representan bloques de construcción de una página (ej. cabeceras, pies de página o formularios completos). | `navbar`, `footer`, `nueva-receta` (El formulario para añadir una nueva receta). |
+| **Pagina** | Los componentes de nivel superior que representan las vistas o páginas completas de la aplicación. Orquestan los Organismos para definir la plantilla final de la interfaz. | `recetas` (La vista principal que lista todas las recetas). |
+
+Esta separación facilita el mantenimiento, la reutilización de código y la escalabilidad del proyecto.
+
 ## Contribución
 
 Si quieres contribuir al proyecto Recetas de Leyre, sigue estos pasos:
