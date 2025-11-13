@@ -1,59 +1,85 @@
-# 01PaginaPersonal
+# Recetas de Leyre
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.5.
+Este es un proyecto front-end desarrollado con **Angular**, diseñado para **gestionar y visualizar recetas**.
 
-## Development server
+---
 
-To start a local development server, run:
+## Características
+
+- **Listado de Recetas**: Navegación por una lista de todas las recetas disponibles.  
+- **Detalle de Receta**: Visualización de ingredientes, pasos y notas específicas.  
+- **Diseño Responsivo**: Interfaz adaptada para verse bien en dispositivos móviles y de escritorio.  
+- **Tecnología Moderna**: Implementación utilizando componentes funcionales y buenas prácticas de Angular.  
+
+---
+
+## Requisitos
+
+Necesitarás tener instalados los siguientes programas en tu computadora:
+
+- **Node.js** y **npm** (o Yarn)  
+- **Angular CLI** (Interfaz de Línea de Comandos de Angular)  
+
+Puedes instalar Angular CLI globalmente con el siguiente comando si aún no lo tienes:
 
 ```bash
+npm install -g @angular/cli
+```
+## Instalación y Ejecución
+
+Sigue estos pasos para descargar, instalar las dependencias y ejecutar la aplicación en tu entorno local.
+
+1. Clonar el repositorio:
+```
+git clone https://github.com/your-username/recetas-de-leyre.git
+```
+
+2. Instalar las dependencias:
+```
+cd recetas-de-leyre
+npm install
+```
+
+3. Iniciar el servidor de desarrollo:
+```
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+4. Abre tu navegador y navega a `http://localhost:4200/` para acceder a la aplicación.
 
-## Code scaffolding
+## Uso
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+La aplicación Recetas de Leyre permite a los usuarios ver, crear y eliminar recetas. A continuación se explica cómo usar las funciones principales:
 
-```bash
-ng generate component component-name
-```
+1. **Ver Recetas**:
+   - La aplicación muestra una lista de recetas en la página principal.
+   - Puedes filtrar las recetas por categoría usando el menú de navegación.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+2. **Crear una Nueva Receta**:
+   - Haz clic en el botón "Crear receta" en el menú de navegación para abrir el modal de creación de recetas.
+   - Completa el formulario con los detalles de la receta y haz clic en "Guardar Receta" para añadirla a la lista.
 
-```bash
-ng generate --help
-```
+3. **Eliminar una Receta**:
+   - Cada tarjeta de receta tiene un botón "Eliminar receta" que permite borrar la receta correspondiente de la lista.
 
-## Building
+## Estructura de Componentes
 
-To build the project run:
+La organización de los componentes dentro de la carpeta `src/app/components/` se basa en la complejidad y la función de cada elemento, siguiendo un patrón modular similar al Atomic Design.
 
-```bash
-ng build
-```
+| Carpeta | Descripción | Ejemplos |
+| :--- | :--- | :--- |
+| **Molecula** | Componentes de tamaño medio que combinan varios elementos (o "átomos") para formar una unidad funcional coherente. | `receta` (El componente que muestra los detalles de una receta individual). |
+| **Organismo** | Secciones complejas de la interfaz que agrupan varias Moléculas. Representan bloques de construcción de una página (ej. cabeceras, pies de página o formularios completos). | `navbar`, `footer`, `nueva-receta` (El formulario para añadir una nueva receta). |
+| **Pagina** | Los componentes de nivel superior que representan las vistas o páginas completas de la aplicación. Orquestan los Organismos para definir la plantilla final de la interfaz. | `recetas` (La vista principal que lista todas las recetas). |
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Esta separación facilita el mantenimiento, la reutilización de código y la escalabilidad del proyecto.
 
-## Running unit tests
+## Contribución
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Si quieres contribuir al proyecto Recetas de Leyre, sigue estos pasos:
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+  1. Haz un fork del repositorio.
+  2. Crea una nueva rama para tu funcionalidad o corrección de errores.
+  3. Realiza tus cambios y haz commit.
+  4. Haz push de tus cambios a tu repositorio fork.
+  5. Envía un pull request al repositorio original.
