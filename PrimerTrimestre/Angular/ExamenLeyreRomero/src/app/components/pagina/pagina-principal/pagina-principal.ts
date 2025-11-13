@@ -13,43 +13,98 @@ import { ListaPizzas } from '../../organismo/lista-pizzas/lista-pizzas';
 import { ResumenPedido } from '../../organismo/resumen-pedido/resumen-pedido';
 import { FormularioPago } from '../../organismo/formulario-pago/formulario-pago';
 
-
 @Component({
   selector: 'app-pagina-principal',
-  imports: [
-    CommonModule, 
-    Header, 
-    Footer, 
-    ListaPizzas, 
-    ResumenPedido, 
-    FormularioPago,
-    CurrencyPipe
-  ],
+  imports: [CommonModule, Header, Footer, ListaPizzas, ResumenPedido, FormularioPago, CurrencyPipe],
   templateUrl: './pagina-principal.html',
   styleUrl: './pagina-principal.scss',
 })
 export class PaginaPrincipal {
-// Configuración de la aplicación
+  // Configuración de la aplicación
   appConfig: ConfiguracionModel = new ConfiguracionModel(
     '4V PIZZA',
-    'icono-pizza.png', // Placeholder (debe estar en assets)
-    'Leyre Romero' 
+    'icono-pizza.png',
+    'Leyre Romero'
   );
-  
+
   // Estado de la aplicación (simula el routing)
   vista: 'pizzas' | 'pago' = 'pizzas';
 
-  // Datos de las pizzas (Usaremos Data URIs o URLs simples)
+  // Define este mapa en tu componente PaginaPrincipal (o en un archivo de configuración TS)
+  INGREDIENT_ICON_MAP: { [key: string]: string } = {
+    // Ingredientes Base
+    Tomate: 'fa-solid fa-tomato', // Icono de Tomate/Salsa
+    Queso: 'fa-solid fa-cheese', // Icono de Queso
+
+    // Ingredientes Específicos
+    Hoja: 'fa-solid fa-leaf', // Para albahaca/vegetal
+    Carne: 'fa-solid fa-cow', // Para carne de vaca (BBQ)
+    Cebolla: 'fa-solid fa-onion', // Icono de Cebolla
+    Pescado: 'fa-solid fa-fish', // Icono de Pescado (Napolitana)
+    Pimiento: 'fa-solid fa-pepper-hot', // Icono de Pimiento/Picante
+    Champiñon: 'fa-solid fa-mushroom', // Icono de Champiñón
+    Piña: 'fa-solid fa-pineapple', // Icono de Piña
+    Huevo: 'fa-solid fa-egg', // Icono de Huevo (Carbonara)
+    Crema: 'fa-solid fa-bowl-food', // Icono de Crema/Nata/Salsa
+
+    // Añade más según tus necesidades
+  };
+
+  // En tu componente PaginaPrincipal
+
+  // ... (INGREDIENT_ICON_MAP definido previamente) ...
+
   pizzas: PizzaModel[] = [
-    // Nota: Las URLs son placeholders, deben ser reemplazadas por tus imágenes o Data URIs
-    new PizzaModel('R1', 'Margarita', 15.50, 'pizza-margarita.jpg', ['fa-solid fa-tomato-slice', 'fa-solid fa-cheese', 'fa-solid fa-leaf']),
-    new PizzaModel('R2', 'BBQ', 18.00, 'pizza-bbq2.jpg', ['fa-solid fa-bacon', 'fa-solid fa-cow', 'fa-solid fa-onion']),
-    new PizzaModel('R3', 'Napolitana', 16.50, 'pizza-napolitana.jpg', ['fa-solid fa-fish', 'fa-solid fa-olive', 'fa-solid fa-pepper-hot']),
-    new PizzaModel('R4', 'Vegetariana', 14.50, 'pizza-vegetariana.jpg', ['fa-solid fa-carrot', 'fa-solid fa-pepper-hot', 'fa-solid fa-broccoli']),
-    new PizzaModel('R5', 'Hawaina', 17.50, 'pizza-hawaiana.jpg', ['fa-solid fa-pineapple', 'fa-solid fa-ham', 'fa-solid fa-cheese']),
-    new PizzaModel('R6', 'Carbonara', 16.00, 'pizza-carbonara.jpg', ['fa-solid fa-egg', 'fa-solid fa-bacon', 'fa-solid fa-mushroom']),
+    new PizzaModel(
+      'R1',
+      'Margarita',
+      15.5,
+      'pizza-margarita.jpg',
+      ['Tomate', 'Queso', 'Hoja'],
+      this.INGREDIENT_ICON_MAP
+    ),
+    new PizzaModel(
+      'R2',
+      'BBQ',
+      18.0,
+      'pizza-bbq2.jpg',
+      ['Tomate', 'Queso', 'Carne', 'Cebolla'],
+      this.INGREDIENT_ICON_MAP
+    ),
+    new PizzaModel(
+      'R3',
+      'Napolitana',
+      16.5,
+      'pizza-napolitana.jpg',
+      ['Tomate', 'Queso', 'Pescado'],
+      this.INGREDIENT_ICON_MAP
+    ),
+    new PizzaModel(
+      'R4',
+      'Vegetariana',
+      14.5,
+      'pizza-vegetariana.jpg',
+      ['Tomate', 'Queso', 'Pimiento', 'Champiñon'],
+      this.INGREDIENT_ICON_MAP
+    ),
+    new PizzaModel(
+      'R5',
+      'Hawaina',
+      17.5,
+      'pizza-hawaiana.jpg',
+      ['Tomate', 'Queso', 'Piña'],
+      this.INGREDIENT_ICON_MAP
+    ),
+    new PizzaModel(
+      'R6',
+      'Carbonara',
+      16.0,
+      'pizza-carbonara.jpg',
+      ['Tomate', 'Queso', 'Huevo', 'Crema'],
+      this.INGREDIENT_ICON_MAP
+    ),
   ];
-  
+
   carrito: CarritoItemModel[] = [];
 
   get totalCarrito(): number {
@@ -57,7 +112,7 @@ export class PaginaPrincipal {
   }
 
   agregarACarrito(newItem: CarritoItemModel): void {
-    const existingItem = this.carrito.find(item => item.idPizza === newItem.idPizza);
+    const existingItem = this.carrito.find((item) => item.idPizza === newItem.idPizza);
 
     if (existingItem) {
       existingItem.cantidad += newItem.cantidad;
@@ -75,6 +130,6 @@ export class PaginaPrincipal {
   limpiarCarrito(): void {
     // Limpiamos la lista de pizzas y volvemos a la vista inicial
     this.carrito = [];
-    this.vista = 'pizzas'; 
+    this.vista = 'pizzas';
   }
 }

@@ -7,28 +7,18 @@
         </div>
 
         <div class="ingredientes mb-3 text-danger">
-            @for (ingrediente of pizza.ingredientes; track $index) { 
-                <i [class]="ingrediente" class="me-2"></i> 
+            @for (iconoClase of pizza.ingredienteIconos; track $index) {
+            <i [class]="iconoClase" class="me-2"></i>
             }
         </div>
 
         <div class="mt-auto d-flex align-items-center pt-2">
             <label for="cantidad-{{ pizza.id }}" class="form-label me-2 mb-0 fw-semibold">Cantidad:</label>
-            <input 
-                type="number" 
-                [formControl]="cantidadControl" 
-                id="cantidad-{{ pizza.id }}" 
-                class="form-control form-control-sm me-3 text-center" 
-                min="1"
-                placeholder="1"
-            >
-            
-            <button 
-                type="button" 
-                class="btn btn-primary btn-sm" 
-                (click)="onAgregar()"
-                [disabled]="cantidadControl.invalid"
-            >
+            <input type="number" [formControl]="cantidadControl" id="cantidad-{{ pizza.id }}"
+                class="form-control form-control-sm me-3 text-center" min="1" placeholder="1">
+
+            <button type="button" class="btn btn-primary btn-sm" (click)="onAgregar()"
+                [disabled]="cantidadControl.invalid">
                 <i class="fa-solid fa-cart-plus"></i>
             </button>
         </div>
