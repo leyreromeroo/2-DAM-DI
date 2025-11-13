@@ -1,0 +1,47 @@
+<div class="container my-5">
+<!-- Botón de Ver/Ocultar Contactos -->
+<div class="row mb-4">
+    <div class="col-md-6 text-center text-md-start">
+        <!-- CORRECCIÓN: Llamar al nuevo método toggleMostrarContactos() -->
+        <button class="btn btn-primary" (click)="toggleMostrarContactos()">
+            <i class="bi bi-person-lines-fill me-1"></i> 
+            <!-- Texto dinámico basado en el estado de la Signal -->
+            {{ mostrarContactos() ? 'Ocultar Contactos' : 'Ver Contactos' }}
+        </button>
+    </div>
+</div>
+
+<!-- Lista de contactos -->
+<!-- El @if usa la Signal correctamente: mostrarContactos() -->
+@if (mostrarContactos()) {
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white fw-bold">
+                    <i class="bi bi-people-fill me-1"></i> Lista de contactos
+                </div>
+                <div class="card-body">
+                    <!-- La comprobación de longitud usa la Signal correctamente: listaContactos() -->
+                    @if (listaContactos().length === 0) {
+                        <p class="text-muted text-center mb-0">No hay contactos registrados todavía.</p>
+                    } @else {
+                        <ul class="list-group list-group-flush">
+                            <!-- El @for itera sobre el valor de la Signal: listaContactos() -->
+                            @for (contact of listaContactos(); track $index) {
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>
+                                        <i class="bi bi-envelope-at-fill text-primary me-2"></i>
+                                        {{ contact.email }}
+                                    </span>
+                                    <small class="text-muted">{{ contact.mensaje }}</small>
+                                </li>
+                            }
+                        </ul>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+</div>

@@ -1,0 +1,35 @@
+.container-fluid {
+  background-color: #f8fafc;
+  min-height: 100vh;
+
+  .btn {
+    border-radius: 2rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+    }
+  }
+
+  h1 {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .card {
+    border-radius: 1rem;
+    overflow: hidden;
+
+    .card-header {
+      font-size: 1.1rem;
+    }
+
+    .list-group-item {
+      background-color: #fff;
+
+      &:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+    }
+  }
+}

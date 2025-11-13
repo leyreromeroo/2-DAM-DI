@@ -59,7 +59,7 @@ export class NuevaReceta {
     // 3. Crear el objeto final que coincide con RecetaModel
     const nuevaReceta: RecetaModel = {
       id: nuevoId,
-      titulo: formValues.titulo!,
+      titulo: formValues.titulo!, //Poner ! al final para permitir nulos
       foto: formValues.foto as string, 
   
       ingredientes: (formValues.ingredientes ?? '')

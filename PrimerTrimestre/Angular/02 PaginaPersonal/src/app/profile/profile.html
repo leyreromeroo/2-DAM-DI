@@ -1,24 +1,52 @@
-<div class="container-fluid">
+<div class="container-fluid py-4">
 
-    <div class="row">
-        <div class="col-6">
-            @if(!esOculto()){
-                <p class="display-1">{{title}}</p>
-            }
-            <!--<p class="display-1" [hidden]="esOculto()">{{title}}</p>-->
-            <button class="btn btn-primary" (click)="toggleName()">{{titleBoton() | uppercase}}</button>
-        </div>
-        <div class="col-6">
-            <!-- Ponemos en el evento padre () la variable del output del hijo y la función del padre que recoje la del hijo -->
-             <!-- Recorremos ael array y mostramos als fotos-->
-            <app-foto-personal [title]="titlePhoto" [srcImage]="srcPhoto" (clickFoto)="ensenarClick($event)"> </app-foto-personal>
-            <p class="lead text-center">{{imagenClickeada}}</p>
-        </div>
-        <div class="row">
-            @for (photo of photos; track $index) {
-                <div class="col-6 mb-3">
-                    <app-foto-personal [title]="photo.nombre" [srcImage]="photo.foto" (clickFoto)="ensenarClick($event)"> </app-foto-personal>
-                </div>
-            }
-        </div>
+  <!-- Título y botón mostrar/ocultar -->
+  <div class="row mb-4 align-items-center">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      @if(!esOculto()) {
+        <h1 class="display-5 fw-bold text-primary">{{ title }}</h1>
+      }
+
+      <button class="btn btn-outline-primary me-2" (click)="toggleName()">
+        <i class="bi" [class.bi-eye-slash]="!esOculto()" [class.bi-eye]="esOculto()"></i>
+        {{ titleBoton() | uppercase }}
+      </button>
+
+      <button class="btn btn-success" (click)="toggleContactos()">
+        <i class="bi bi-person-lines-fill me-1"></i> Ver contactos
+      </button>
     </div>
+
+    <!-- Foto principal -->
+    <div class="col-md-6 text-center">
+      <app-foto-personal
+        [title]="titlePhoto"
+        [srcImage]="srcPhoto"
+        (clickFoto)="ensenarClick($event)">
+      </app-foto-personal>
+
+      @if (imagenClickeada !== '') {
+        <p class="lead mt-2 text-muted">
+          Imagen clickeada: <span class="fw-semibold text-dark">{{ imagenClickeada }}</span>
+        </p>
+      }
+    </div>
+  </div>
+
+  <!-- Galería de fotos -->
+  <div class="row g-3 mb-4">
+    @for (photo of photos; track $index) {
+      <div class="col-6 col-md-4 col-lg-3">
+        <app-foto-personal
+          [title]="photo.nombre"
+          [srcImage]="photo.foto"
+          (clickFoto)="ensenarClick($event)">
+        </app-foto-personal>
+      </div>
+    }
+  </div>
+
+  
+
+ 
+</div>

@@ -1,0 +1,48 @@
+<form [formGroup]="contactForm" (ngSubmit)="sendMessage()" novalidate class="p-4 rounded shadow bg-white">
+  <h4 class="mb-4 text-center text-primary fw-bold">
+    <i class="bi bi-envelope-fill me-2"></i>Contáctanos
+  </h4>
+
+  <div class="mb-3">
+    <label for="email" class="form-label fw-semibold">
+      <i class="bi bi-at me-1"></i>Email
+    </label>
+    <input
+      type="email"
+      id="email"
+      class="form-control"
+      formControlName="email"
+      placeholder="tuemail@ejemplo.com"
+    />
+
+    @if (email?.invalid && (email?.touched || email?.dirty)) {
+      <div class="invalid-feedback">
+        @if (email?.hasError('required')) {
+          <div>El email es obligatorio.</div>
+        }
+        @if (email?.hasError('email')) {
+          <div>Formato de email no válido.</div>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="mb-3">
+    <label for="mensaje" class="form-label fw-semibold">
+      <i class="bi bi-chat-dots me-1"></i>Mensaje
+    </label>
+    <textarea
+      id="mensaje"
+      rows="4"
+      class="form-control"
+      formControlName="mensaje"
+      placeholder="Escribe tu mensaje aquí..."
+    ></textarea>
+  </div>
+
+  <div class="text-center">
+    <button type="submit" class="btn btn-primary px-4" [disabled]="contactForm.invalid">
+      <i class="bi bi-send-fill me-1"></i>Enviar
+    </button>
+  </div>
+</form>

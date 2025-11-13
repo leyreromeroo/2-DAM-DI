@@ -1,0 +1,104 @@
+/*
+  SCSS para la barra de navegación de perfil
+  Diseño: Pestañas centradas y elegantes con transición.
+*/
+
+:host {
+    /* Asegura que el componente se renderice como bloque para mejor control de diseño */
+    display: block;
+    font-family: 'Inter', sans-serif;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    background-color: #f7f9fc; /* Fondo muy claro */
+    padding: 0 1rem;
+    border-bottom: 1px solid #e0e6ed;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 800px; /* Limita el ancho del menú para que no se estire demasiado */
+}
+
+li {
+    margin: 0;
+    flex-grow: 1; /* Permite que los ítems se distribuyan equitativamente */
+    text-align: center;
+}
+
+a {
+    display: block;
+    padding: 1rem 1.5rem;
+    text-decoration: none;
+    color: #4a5568; /* Color de texto gris oscuro */
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
+    transition: all 0.3s ease;
+    
+    /* Efecto hover: Subrayado sutil */
+    &:hover {
+        color: #3182ce; /* Azul brillante al pasar el ratón */
+        background-color: #edf2f7; /* Ligero cambio de color de fondo */
+    }
+
+    /* Estado Activo: Subrayado grueso de color primario */
+    &.active {
+        color: #3182ce; /* Texto azul */
+        font-weight: 600;
+        
+        /* Línea inferior activa */
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px; /* Grosor de la línea */
+            background-color: #3182ce; /* Color primario azul */
+            border-radius: 2px 2px 0 0;
+            transform: scaleX(1); /* Asegura que la línea sea visible */
+            transition: transform 0.3s ease;
+        }
+    }
+}
+
+/* Responsividad: Ajustes para pantallas pequeñas (móviles)
+  Los ítems se vuelven más compactos.
+*/
+@media (max-width: 600px) {
+    ul {
+        flex-direction: column; /* Apila las pestañas en móvil */
+        max-width: none;
+    }
+    
+    li {
+        flex-grow: 0; /* Deshabilita el crecimiento equitativo en columna */
+        border-bottom: 1px solid #e0e6ed;
+        
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    a {
+        padding: 0.8rem 1rem;
+        text-align: left;
+        
+        /* Ajustar línea activa para la vista móvil */
+        &.active::after {
+            left: 0;
+            top: 0;
+            width: 3px; /* La línea activa se vuelve vertical */
+            height: 100%;
+            border-radius: 0 2px 2px 0;
+        }
+    }
+}

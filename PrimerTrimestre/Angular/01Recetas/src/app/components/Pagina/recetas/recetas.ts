@@ -1,38 +1,73 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core'; // Importar OnInit
 import { RecetaModel } from '../../../models/recetaModel';
 import { Receta } from '../../Molecula/receta/receta';
 import { NuevaReceta } from '../../Organismo/nueva-receta/nueva-receta';
+import { CommonModule } from '@angular/common'; // Necesario para directivas como *ngIf o eventos (input)
 
 @Component({
   selector: 'app-recetas',
-  imports: [Receta, NuevaReceta],
+  // Se añade CommonModule para las directivas y el manejo de eventos en el template
+  imports: [Receta, NuevaReceta, CommonModule],
+  // Nota: Si usas Angular moderno, considera añadir 'standalone: true' si no lo tiene.
   templateUrl: './recetas.html',
   styleUrl: './recetas.scss',
 })
-export class Recetas {
+export class Recetas implements OnInit {
+  // Lista original: Mantiene el estado completo de las recetas
+  recetasOriginal: RecetaModel[] = [];
+  // Lista visible: Es la que se recorre en el template (se filtra)
   recetas: RecetaModel[] = [];
-  idImagen = '';
-  foto = '';
-  titulo = '';
-  ingredientes = [];
+  // Propiedad para almacenar el texto que escribe el usuario para filtrar
+  filtroTitulo: string = '';
 
   // Esta función recibe el ID emitido por el componente hijo.
   onDelete(idReceta: string): void {
-    // La lógica de eliminación permanece aquí, en el dueño de los datos.
-    var recetaAEliminar = this.recetas.find((receta) => receta.id === idReceta);
-    this.recetas = this.recetas.filter((receta) => receta.id !== idReceta);
+    // Buscar y guardar la receta a eliminar de la lista original
+    var recetaAEliminar = this.recetasOriginal.find((receta) => receta.id === idReceta);
+
+    // 1. Eliminar de la lista original
+    this.recetasOriginal = this.recetasOriginal.filter((receta) => receta.id !== idReceta);
+    
+    // 2. Volver a aplicar el filtro para que se actualice la lista visible (this.recetas)
+    this.aplicarFiltro();
+    
     alert(`La receta: ${recetaAEliminar?.titulo} ha sido eliminada.`);
   }
+
   agregarNuevaReceta(receta: RecetaModel): void {
-    this.recetas.push(receta);
+    // 1. Añadir a la lista original
+    this.recetasOriginal.push(receta);
+    
+    // 2. Volver a aplicar el filtro para que se actualice la lista visible
+    this.aplicarFiltro();
+    
     alert(`Receta "${receta.titulo}" agregada exitosamente.`);
     console.log('Receta guardada:', receta);
-    // Nota: Aquí es donde normalmente se llamaría a un servicio para guardar en BBDD.
+  }
+  
+  // Función que se llama cuando el usuario escribe en el campo de texto (input)
+  onFiltrar(event: Event) {
+    // Obtener el valor del input y pasarlo a minúsculas
+    this.filtroTitulo = (event.target as HTMLInputElement).value.toLowerCase();
+    this.aplicarFiltro();
+  }
+
+  // Lógica principal de filtrado
+  aplicarFiltro(): void {
+    if (!this.filtroTitulo.trim()) {
+      // Si el filtro está vacío, mostrar todas las recetas de la lista original
+      this.recetas = [...this.recetasOriginal];
+    } else {
+      // Filtrar por título (insensible a mayúsculas/minúsculas)
+      this.recetas = this.recetasOriginal.filter(receta =>
+        receta.titulo.toLowerCase().includes(this.filtroTitulo)
+      );
+    }
   }
 
   ngOnInit() {
-    // 3. Inicializa el array de recetas con el contenido de tus cards
-    this.recetas = [
+    // Inicialización de datos
+    this.recetasOriginal = [
       {
         id: 'R1', // ID ÚNICO
         foto: './img/images.jpg',
@@ -76,5 +111,8 @@ export class Recetas {
         ingredientes: ['Calabacín', 'Zanahoria', 'Cebolla', 'Huevo', 'Aceite de oliva y sal'],
       },
     ];
+
+    // Al inicio, la lista visible es igual a la lista original
+    this.recetas = [...this.recetasOriginal];
   }
 }
