@@ -13,6 +13,7 @@ import { ListaPizzas } from '../../organismo/lista-pizzas/lista-pizzas';
 import { ResumenPedido } from '../../organismo/resumen-pedido/resumen-pedido';
 import { FormularioPago } from '../../organismo/formulario-pago/formulario-pago';
 
+
 @Component({
   selector: 'app-pagina-principal',
   imports: [

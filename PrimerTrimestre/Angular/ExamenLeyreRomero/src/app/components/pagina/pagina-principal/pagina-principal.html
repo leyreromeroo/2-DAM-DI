@@ -17,14 +17,14 @@
         </button>
     </div>
 
-     <app-formulario-pago [items]="carrito" (pagoRealizado)="finalizarPedido()"></app-formulario-pago>
     }
 
-   
+
 
     @if (vista === 'pago') {
-    <app-formulario-pago [items]="carrito" (pagoRealizado)="finalizarPedido()" (limpiarPedido)="limpiarCarrito()"></app-formulario-pago>
 
+    <app-formulario-pago [items]="carrito" (pagoRealizado)="finalizarPedido()"
+        (limpiarPedido)="limpiarCarrito()"></app-formulario-pago>
     <div class="text-center mt-4">
         <button type="button" class="btn btn-outline-secondary" (click)="vista = 'pizzas'">
             ← Volver a Pizzas

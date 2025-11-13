@@ -4,6 +4,7 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-linea-pedido',
+  standalone: true,
   imports: [CommonModule, CurrencyPipe],
   templateUrl: './linea-pedido.html',
   styleUrl: './linea-pedido.scss',
