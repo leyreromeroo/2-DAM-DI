@@ -1,0 +1,36 @@
+<app-header [config]="appConfig"></app-header>
+
+<main class="container main-content pt-1 mt-3 mb-5 pb-5">
+
+    @if (vista === 'pizzas') {
+
+    <app-lista-pizzas [pizzas]="pizzas" (pizzaAgregada)="agregarACarrito($event)">
+    </app-lista-pizzas>
+
+    <app-resumen-pedido [items]="carrito">
+    </app-resumen-pedido>
+
+    <div class="text-center mt-5">
+        <button type="button" class="btn btn-primary btn-lg shadow" [disabled]="carrito.length === 0"
+            (click)="vista = 'pago'">
+            Proceder al Pago ({{ totalCarrito | currency:'EUR' }})
+        </button>
+    </div>
+
+     <app-formulario-pago [items]="carrito" (pagoRealizado)="finalizarPedido()"></app-formulario-pago>
+    }
+
+   
+
+    @if (vista === 'pago') {
+    <app-formulario-pago [items]="carrito" (pagoRealizado)="finalizarPedido()" (limpiarPedido)="limpiarCarrito()"></app-formulario-pago>
+
+    <div class="text-center mt-4">
+        <button type="button" class="btn btn-outline-secondary" (click)="vista = 'pizzas'">
+            ← Volver a Pizzas
+        </button>
+    </div>
+    }
+</main>
+
+<app-footer [creador]="appConfig.creador"></app-footer>

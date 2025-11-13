@@ -1,0 +1,4 @@
+<div class="d-flex justify-content-between align-items-center pedido-linea p-3 mb-2 border-bottom">
+    <span class="fs-5 text-dark">{{ item.cantidad }} x <strong>{{ item.nombre }}</strong></span>
+    <strong class="text-danger fs-5">{{ item.precioTotal | currency:'EUR' }}</strong>
+</div>

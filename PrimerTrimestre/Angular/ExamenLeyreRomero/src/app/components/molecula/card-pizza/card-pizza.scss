@@ -1,0 +1,19 @@
+.pizza-card {
+    border: 1px solid #ddd;
+    transition: transform 0.2s, box-shadow 0.2s;
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+}
+.card-img-top {
+    height: 180px; 
+    width: 100%;
+    object-fit: cover; 
+    object-position: center;
+}
+
+.ingredientes i {
+    font-size: 1.6rem; 
+    margin-right: 0.5rem;
+}

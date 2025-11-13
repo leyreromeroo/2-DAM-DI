@@ -1,0 +1,77 @@
+<div class="p-4 bg-white shadow-lg rounded">
+    <h2 class="text-primary mb-4 border-bottom pb-2">3. Pago del Pedido</h2>
+    <h4 class="text-secondary mb-3">Resumen del Pedido:</h4>
+    @for (item of items; track item.idPizza) {
+        <app-linea-pedido [item]="item"></app-linea-pedido>
+    }
+    <div class="d-flex justify-content-end mt-3 mb-4">
+        <h3 class="fw-bold">Total Final: <span class="text-success">{{ total | currency:'EUR' }}</span></h3>
+    </div>
+
+    <form [formGroup]="pagoForm" (ngSubmit)="onPagar()" class="row g-4">
+        <div class="col-md-6">
+            <label for="horaEntrega" class="form-label fw-semibold">Hora Entrega (HH:MM)</label>
+            <input type="time" id="horaEntrega" formControlName="horaEntrega" class="form-control"
+                [class.is-invalid]="f['horaEntrega'].invalid && (f['horaEntrega'].dirty || f['horaEntrega'].touched)">
+            @if (f['horaEntrega'].invalid && (f['horaEntrega'].dirty || f['horaEntrega'].touched)){
+            <div class="invalid-feedback">Formato de hora inválido (HH:MM) o campo requerido.</div>
+            }
+        </div>
+
+        <div class="col-md-6">
+            <label for="direccion" class="form-label fw-semibold">Dirección Completa</label>
+            <textarea id="direccion" formControlName="direccion" class="form-control" rows="1"
+                [class.is-invalid]="f['direccion'].invalid && (f['direccion'].dirty || f['direccion'].touched)"></textarea>
+            @if (f['direccion'].invalid && (f['direccion'].dirty || f['direccion'].touched)){
+            <div class="invalid-feedback">La dirección es requerida.</div>
+            }
+        </div>
+
+        <div class="col-12 mt-4 border-top pt-4">
+            <label class="form-label d-block fw-semibold">Método de Pago</label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="pagoTarjeta" value="Tarjeta"
+                    formControlName="metodoPago">
+                <label class="form-check-label" for="pagoTarjeta">Tarjeta</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="pagoBizum" value="Bizum" formControlName="metodoPago">
+                <label class="form-check-label" for="pagoBizum">Bizum</label>
+            </div>
+        </div>
+
+        @if (f['metodoPago'].value === 'Tarjeta') {
+        <div class="col-md-6">
+            <label for="numeroTarjeta" class="form-label">Número Tarjeta (16 dígitos)</label>
+            <input type="text" id="numeroTarjeta" formControlName="numeroTarjeta" class="form-control"
+                [class.is-invalid]="f['numeroTarjeta'].invalid && (f['numeroTarjeta'].dirty || f['numeroTarjeta'].touched)"
+                inputmode="numeric" maxlength="16" placeholder="0000 0000 0000 0000">
+            @if (f['numeroTarjeta'].invalid && (f['numeroTarjeta'].dirty || f['numeroTarjeta'].touched)){
+            <div class="invalid-feedback">Debe ser un número de tarjeta de 16 dígitos.</div>
+            }
+        </div>
+        }
+
+        @if (f['metodoPago'].value === 'Bizum') {
+        <div class="col-md-6">
+            <label for="numeroMovil" class="form-label">Número Teléfono Móvil (9 dígitos)</label>
+            <input type="text" id="numeroMovil" formControlName="numeroMovil" class="form-control"
+                [class.is-invalid]="f['numeroMovil'].invalid && (f['numeroMovil'].dirty || f['numeroMovil'].touched)"
+                inputmode="numeric" maxlength="9" placeholder="600 00 00 00">
+            @if (f['numeroMovil'].invalid && (f['numeroMovil'].dirty || f['numeroMovil'].touched)){
+            <div class="invalid-feedback">Debe ser un número de móvil de 9 dígitos.</div>
+            }
+        </div>
+        }
+
+        <div class="col-12 mt-5 text-center">
+            <button type="submit" class="btn btn-success btn-lg me-3"
+                [disabled]="pagoForm.invalid || items.length === 0">
+                PAGAR <i class="bi bi-credit-card-fill"></i>
+            </button>
+            <button type="button" class="btn btn-outline-danger btn-lg" (click)="onLimpiar()">
+                LIMPIAR <i class="bi bi-trash3-fill"></i>
+            </button>
+        </div>
+    </form>
+</div>

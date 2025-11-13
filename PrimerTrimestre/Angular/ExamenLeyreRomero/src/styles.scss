@@ -1,1 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+
+@import 'bootstrap/scss/bootstrap';
+
+// Variables de color personalizadas
+$color-principal: #a80000; 
+$color-secundario: #ffc107; 
+$color-fondo: #f8f9fa;
+
+.text-dorado{
+    color: $color-secundario;
+} 
+
+body {
+    background-color: $color-fondo;
+}
+
+.main-content {
+    padding-top: 80px; // Espacio para el header fijo
+    padding-bottom: 80px; // Espacio para el footer fijo
+}
+
+// Estilo para los inputs inválidos de Bootstrap
+.form-control.is-invalid, .form-control.is-invalid:focus {
+    border-color: $color-principal !important;
+    box-shadow: 0 0 0 0.25rem rgba(168, 0, 0, 0.25) !important;
+}
+
+// Botones principales
+.btn-primary, .btn-success {
+    background-color: $color-principal !important;
+    border-color: $color-principal !important;
+    &:hover {
+        background-color: darken($color-principal, 10%) !important;
+        border-color: darken($color-principal, 10%) !important;
+    }
+}

@@ -1,0 +1,13 @@
+<div class="mt-5 p-4 bg-white shadow-sm border rounded">
+    <h3 class="text-center text-secondary mb-3 pb-2 border-bottom">RESUMEN DEL PEDIDO</h3>
+    @if (items.length > 0) {
+    @for (item of items; track item.idPizza) {
+    <app-linea-pedido [item]="item"></app-linea-pedido>
+    }
+    <div class="d-flex justify-content-end mt-4 pt-3 border-top">
+        <h4 class="fw-bold">Total: <span class="text-success">{{ total | currency:'EUR' }}</span></h4>
+    </div>
+    } @else {
+    <p class="text-center text-muted p-4">Aún no hay pizzas en el carrito. ¡Añade tu favorita!</p>
+    }
+</div>

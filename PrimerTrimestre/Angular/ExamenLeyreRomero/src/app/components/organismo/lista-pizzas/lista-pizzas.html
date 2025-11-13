@@ -1,0 +1,8 @@
+<div class="row row-cols-1 row-cols-md-3 g-4 mt-5">
+    @for (pizza of pizzas; track pizza.id) {
+    <div class="col">
+        <app-card-pizza [pizza]="pizza" (agregarAlCarro)="onAgregarAlCarro($event)">
+        </app-card-pizza>
+    </div>
+    }
+</div>

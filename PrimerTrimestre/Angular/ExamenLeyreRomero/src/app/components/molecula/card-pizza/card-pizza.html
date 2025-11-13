@@ -1,0 +1,36 @@
+<div class="card pizza-card shadow-lg h-100">
+    <img [src]="pizza.fotoUrl" class="card-img-top" alt="{{ pizza.nombre }}">
+    <div class="card-body d-flex flex-column">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="card-title text-danger fw-bold">{{ pizza.nombre }}</h5>
+            <span class="badge bg-warning text-dark fs-5 p-2">{{ pizza.precio | currency:'EUR' }}</span>
+        </div>
+
+        <div class="ingredientes mb-3 text-danger">
+            @for (ingrediente of pizza.ingredientes; track $index) { 
+                <i [class]="ingrediente" class="me-2"></i> 
+            }
+        </div>
+
+        <div class="mt-auto d-flex align-items-center pt-2">
+            <label for="cantidad-{{ pizza.id }}" class="form-label me-2 mb-0 fw-semibold">Cantidad:</label>
+            <input 
+                type="number" 
+                [formControl]="cantidadControl" 
+                id="cantidad-{{ pizza.id }}" 
+                class="form-control form-control-sm me-3 text-center" 
+                min="1"
+                placeholder="1"
+            >
+            
+            <button 
+                type="button" 
+                class="btn btn-primary btn-sm" 
+                (click)="onAgregar()"
+                [disabled]="cantidadControl.invalid"
+            >
+                <i class="fa-solid fa-cart-plus"></i>
+            </button>
+        </div>
+    </div>
+</div>
