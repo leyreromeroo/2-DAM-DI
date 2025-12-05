@@ -13,7 +13,7 @@
   }
 
   &-body {
-    flex: 1; 
+    flex: 1;
     display: flex;
     flex-direction: column;
   }
@@ -34,5 +34,31 @@
       transform: scale(1.1);
       background-color: #bb2d3b;
     }
+  }
+
+  // ... tu css existente ...
+
+  .cursor-pointer {
+    cursor: pointer;
+    transition: transform 0.1s;
+
+    &:hover {
+      transform: scale(1.2); // Efecto pop al pasar el ratón
+    }
+  }
+
+  .estrellas {
+    font-size: 1.1rem;
+    // Pequeño truco para que las estrellas se vean bien alineadas
+    display: flex;
+    gap: 2px;
+  }
+
+  .text-warning {
+    color: #ffc107 !important; // Amarillo bootstrap
+  }
+
+  .text-muted {
+    color: #dee2e6 !important; // Gris claro para estrellas vacías
   }
 }
