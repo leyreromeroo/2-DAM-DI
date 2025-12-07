@@ -6,3 +6,9 @@ form {
 img {
   object-fit: cover;
 }
+
+.modal-dialog-centered {
+    display: flex; /* Habilita el modelo Flexbox */
+    align-items: center; /* Centra el modal verticalmente */
+    min-height: calc(100% - (1.75rem * 2)); /* Asegura que el contenedor ocupe la altura necesaria */
+}

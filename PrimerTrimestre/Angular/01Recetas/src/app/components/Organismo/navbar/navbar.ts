@@ -1,4 +1,5 @@
 import { Component} from '@angular/core';
+import { ServicioRecetas } from '../../../services/servicio-recetas';
 
 
 @Component({
@@ -8,6 +9,10 @@ import { Component} from '@angular/core';
   styleUrl: './navbar.scss'
 })
 export class Navbar {
- 
+ constructor(private recetasService: ServicioRecetas) {}
+
+    filtrarPorCategoria(categoria: string) {
+    this.recetasService.setFiltroCategoria(categoria); 
+}
 }
 

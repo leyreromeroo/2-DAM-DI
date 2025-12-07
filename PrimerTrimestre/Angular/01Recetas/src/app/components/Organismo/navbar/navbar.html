@@ -26,15 +26,17 @@
                         Recetas
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarRecetas">
-                        <li><a class="dropdown-item" routerLink="/recetas/para-picar">Para picar</a></li>
-                        <li><a class="dropdown-item" routerLink="/recetas/primeros">Primeros</a></li>
-                        <li><a class="dropdown-item" routerLink="/recetas/segundos">Segundos</a></li>
-                        <li><a class="dropdown-item" routerLink="/recetas/postres">Postres</a></li>
+                        <li><a class="dropdown-item" (click)="filtrarPorCategoria('Picar')">Para picar</a></li>
+                        <li><a class="dropdown-item" (click)="filtrarPorCategoria('Primeros')">Primeros</a></li>
+                        <li><a class="dropdown-item" (click)="filtrarPorCategoria('Segundos')">Segundos</a></li>
+                        <li><a class="dropdown-item" (click)="filtrarPorCategoria('Postres')">Postres</a></li>
+                        
+                        <li><hr class="dropdown-divider"></li>
+                        
+                        <li><a class="dropdown-item" (click)="filtrarPorCategoria('')">Ver Todas</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
-       
-
     </div>
 </nav>

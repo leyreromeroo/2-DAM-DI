@@ -1,12 +1,11 @@
 <div class="modal fade" id="crearRecetaModal" tabindex="-1" aria-labelledby="crearRecetaLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered"> 
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="crearRecetaLabel">Crear Receta</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
-                <!-- Formulario -->
                 <form [formGroup]="nuevaRecetaForm" class="row g-3 needs-validation mb-5" (ngSubmit)="onSubmit()">
                     <h2>Nueva Receta</h2>
 
@@ -16,6 +15,20 @@
                             placeholder="Ej: Ensalada de quinoa con aguacate" required>
                         <div class="invalid-feedback">
                             Por favor, introduce un título.
+                        </div>
+                    </div>
+
+                    <div class="col-12 position-relative">
+                        <label for="categoria" class="form-label">Categoría</label>
+                        <select class="form-select" id="categoria" formControlName="categoria" required>
+                            <option value="" disabled>Selecciona una categoría...</option>
+                            <option value="Picar">Para Picar</option>
+                            <option value="Primeros">Primeros</option>
+                            <option value="Segundos">Segundos</option>
+                            <option value="Postres">Postres</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor, selecciona una categoría.
                         </div>
                     </div>
 

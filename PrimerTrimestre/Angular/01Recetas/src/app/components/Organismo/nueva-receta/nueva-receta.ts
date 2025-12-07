@@ -18,7 +18,8 @@ export class NuevaReceta {
     id: new FormControl<string>(''), 
     titulo: new FormControl('', Validators.required),
     // Usamos string|ArrayBuffer|null porque File Reader devuelve esto
-    foto: new FormControl<string | ArrayBuffer | null>(null, Validators.required), 
+    foto: new FormControl<string | ArrayBuffer | null>(null, Validators.required),
+    categoria: new FormControl('', Validators.required), 
     ingredientes: new FormControl('', Validators.required) 
   });
 
@@ -60,7 +61,8 @@ export class NuevaReceta {
     const nuevaReceta: RecetaModel = {
       id: nuevoId,
       titulo: formValues.titulo!, //Poner ! al final para permitir nulos
-      foto: formValues.foto as string, 
+      foto: formValues.foto as string,
+      categoria: formValues.categoria!, 
   
       ingredientes: (formValues.ingredientes ?? '')
         .split(/[\n,]+/)

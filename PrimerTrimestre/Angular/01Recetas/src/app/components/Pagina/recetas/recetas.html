@@ -5,42 +5,36 @@
         <span class="input-group-text bg-white border-end-0">
           <i class="fa-solid fa-magnifying-glass text-muted"></i>
         </span>
-        
-        <input
-          type="text"
-          class="form-control border-start-0"
-          placeholder="Buscar receta..."
-          [value]="filtroTitulo"
-          (input)="onFiltrarTexto($event)"
-        />
 
-        <select class="form-select" style="max-width: 200px;" (change)="onFiltrarRating($event)">
-          <option value="0">Todas las valoraciones</option>
-          <option value="3">⭐ 3+ Estrellas</option>
-          <option value="4">⭐⭐ 4+ Estrellas</option>
-          <option value="5">⭐⭐⭐⭐⭐ 5 Estrellas</option>
+        <input type="text" class="form-control border-start-0" placeholder="Buscar receta..." [value]="filtroTitulo"
+          (input)="onFiltrarTexto($event)" />
+
+        <select class="form-select text-center" style="max-width: 200px;" (change)="onFiltrarRating($event)">
+          <option value="0">⭐ Valoración Mínima</option>
+          <option value="3">3+ Estrellas</option>
+          <option value="4">4+ Estrellas</option>
+          <option value="5">5 Estrellas</option>
         </select>
       </div>
     </div>
   </div>
-  
+
   <div class="row g-4 flex-grow-1 align-items-stretch mt-2">
-    @for (receta of recetasFiltradas; track receta.id) 
+    @for (receta of recetasFiltradas; track receta.id)
     {
-      <div class="col-12 col-sm-6 col-lg-3">
-        <app-receta 
-          [recetaModel]="receta">
-        </app-receta>
-      </div>
+    <div class="col-12 col-sm-6 col-lg-3">
+      <app-receta [recetaModel]="receta">
+      </app-receta>
+    </div>
     }
 
     @if (recetasFiltradas.length === 0) {
-      <div class="col-12 text-center mt-5">
-        <div class="alert alert-light shadow-sm" role="alert">
-          <i class="fa-regular fa-face-sad-tear fa-2x mb-2 d-block text-muted"></i>
-          ¡Vaya! No hay recetas que coincidan con tu búsqueda.
-        </div>
+    <div class="col-12 text-center mt-5">
+      <div class="alert alert-light shadow-sm" role="alert">
+        <i class="fa-regular fa-face-sad-tear fa-2x mb-2 d-block text-muted"></i>
+        ¡Vaya! No hay recetas que coincidan con tu búsqueda.
       </div>
+    </div>
     }
   </div>
 </div>

@@ -1,7 +1,8 @@
 export interface RecetaModel {
-  id: string; // MockAPI usa strings por defecto
+  id: string; 
   titulo: string;
   foto: string;
+  categoria: string;
   ingredientes: string[];
   puntuacion: number; // Promedio 
   votos: number;      // Cantidad total de votos 

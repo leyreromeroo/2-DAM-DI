@@ -16,3 +16,8 @@
 .dropdown-menu li a.dropdown-item:hover {
   background-color: #f8f9fa;
 }
+.dropdown-menu {
+    .dropdown-item {
+        cursor: pointer; 
+    }
+}
