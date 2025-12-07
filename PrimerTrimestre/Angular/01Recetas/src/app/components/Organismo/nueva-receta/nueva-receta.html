@@ -1,72 +1,70 @@
 <div class="modal fade" id="crearRecetaModal" tabindex="-1" aria-labelledby="crearRecetaLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered"> 
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="crearRecetaLabel">Crear Receta</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="crearRecetaLabel">Crear Receta</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="nuevaRecetaForm" class="row g-3 needs-validation mb-5" (ngSubmit)="onSubmit()">
+          <h2>Nueva Receta</h2>
+
+          <div class="col-12 position-relative">
+            <label for="titulo" class="form-label">Título</label>
+            <input type="text" class="form-control" id="titulo" formControlName="titulo"
+              [class.is-invalid]="nuevaRecetaForm.controls.titulo.invalid && nuevaRecetaForm.controls.titulo.touched"
+              placeholder="Ej: Ensalada de quinoa con aguacate" required>
+            <div class="invalid-feedback">
+              Por favor, introduce un título.
             </div>
-            <div class="modal-body">
-                <form [formGroup]="nuevaRecetaForm" class="row g-3 needs-validation mb-5" (ngSubmit)="onSubmit()">
-                    <h2>Nueva Receta</h2>
+          </div>
 
-                    <div class="col-12 position-relative">
-                        <label for="titulo" class="form-label">Título</label>
-                        <input type="text" class="form-control" id="titulo" formControlName="titulo"
-                            placeholder="Ej: Ensalada de quinoa con aguacate" required>
-                        <div class="invalid-feedback">
-                            Por favor, introduce un título.
-                        </div>
-                    </div>
+          <div class="col-12 position-relative">
+            <label for="categoria" class="form-label">Categoría</label>
+            <select class="form-select" id="categoria" formControlName="categoria" required
+              [class.is-invalid]="nuevaRecetaForm.controls.categoria.invalid && nuevaRecetaForm.controls.categoria.touched">
+              <option value="" disabled>Selecciona una categoría...</option>
+              <option value="Picar">Para Picar</option>
+              <option value="Primeros">Primeros</option>
+              <option value="Segundos">Segundos</option>
+              <option value="Postres">Postres</option>
+                                     
+            </select>
+             <div class="invalid-feedback">Por favor, selecciona una categoría.</div>             
+          </div>
 
-                    <div class="col-12 position-relative">
-                        <label for="categoria" class="form-label">Categoría</label>
-                        <select class="form-select" id="categoria" formControlName="categoria" required>
-                            <option value="" disabled>Selecciona una categoría...</option>
-                            <option value="Picar">Para Picar</option>
-                            <option value="Primeros">Primeros</option>
-                            <option value="Segundos">Segundos</option>
-                            <option value="Postres">Postres</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Por favor, selecciona una categoría.
-                        </div>
-                    </div>
+          <div class="col-12 position-relative">
+              <label for="ingredientes" class="form-label">Ingredientes</label>
+               <textarea class="form-control" id="ingredientes" rows="4" formControlName="ingredientes"
+              [class.is-invalid]="nuevaRecetaForm.controls.ingredientes.invalid && nuevaRecetaForm.controls.ingredientes.touched"
+              placeholder="Ej: quinoa, aguacate, tomate cherry, limón..." required></textarea>
+              <div class="invalid-feedback">Escribe los ingredientes.</div>
+          </div>
 
-                    <div class="col-12 position-relative">
-                        <label for="ingredientes" class="form-label">Ingredientes</label>
-                        <textarea class="form-control" id="ingredientes" rows="4" formControlName="ingredientes"
-                            placeholder="Ej: quinoa, aguacate, tomate cherry, limón..." required></textarea>
-                        <div class="invalid-feedback">
-                            Escribe los ingredientes.
-                        </div>
-                    </div>
+           <div class="col-12 position-relative">
+              <label for="foto" class="form-label">Imagen</label>
+              <input type="file" class="form-control" id="foto" accept="image/jpeg, image/jpg"
+              [class.is-invalid]="nuevaRecetaForm.controls.foto.invalid && nuevaRecetaForm.controls.foto.touched"      
+              (change)="onFileSelected($event)" required>
+              <div class="invalid-feedback">Por favor, selecciona una imagen.</div>
+          </div>
 
-                    <div class="col-12 position-relative">
-                        <label for="foto" class="form-label">Imagen</label>
-                        <input type="file" class="form-control" id="foto" accept="image/*"
-                            (change)="onFileSelected($event)" required>
-                        <div class="invalid-feedback">
-                            Por favor, selecciona una imagen.
-                        </div>
-                    </div>
+          @if (imagenPreview) {
+               <div class="col-12">
+                <label class="form-label">Vista previa:</label><br><br>
+                  <img [src]="imagenPreview" class="img-fluid rounded border" style="max-height: 200px;"
+              alt="Vista previa">
+               </div>
+          }
 
-                    @if (imagenPreview) {
-                    <div class="col-12">
-                        <label class="form-label">Vista previa:</label><br><br>
-                        <img [src]="imagenPreview" class="img-fluid rounded border" style="max-height: 200px;"
-                            alt="Vista previa">
-                    </div>
-                    }
-
-                    <div class="col-12">
-                        <button type="submit" class="btn btn btn-light" [disabled]="nuevaRecetaForm.invalid"
-                            data-bs-dismiss="modal">
-                            Guardar Receta
-                        </button>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-    </div>
+           <div class="col-12">
+             <button type="submit" class="btn btn btn-light" [disabled]="nuevaRecetaForm.invalid"
+              data-bs-dismiss="modal">
+                Guardar Receta
+            </button>
+          </div>               
+        </form>           
+      </div>      
+    </div>  
+  </div>
 </div>

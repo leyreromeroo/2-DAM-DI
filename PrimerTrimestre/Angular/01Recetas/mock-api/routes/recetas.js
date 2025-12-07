@@ -5,23 +5,28 @@ const router = express.Router();
 const recetasIniciales = require('../mock-data/recetas.json');
 let recetas = [...recetasIniciales]; // Creamos una copia en memoria
 
-// ==========================================================
+// Cogemos el último ID para continuar la secuencia
+const ultimoId = Math.max(
+    0, // Valor por defecto si el array está vacío
+    ...recetas.map(r => parseInt(r.id.substring(1))) // Obtiene los números de los IDs ('R1', 'R2', etc.)
+);
+
+// Empezamos la secuencia después del ID más alto encontrado (ej: si el último es 4, empezamos en 5)
+let idCounter = ultimoId;
+
 // 1. GET /recetas (Cargar todas)
-// ==========================================================
 router.get('/', (req, res) => {
     console.log('GET /recetas');
     res.json(recetas);
 });
 
-// ==========================================================
 // 2. POST /recetas (Crear nueva receta)
-// ==========================================================
 router.post('/', (req, res) => {
     console.log('POST /recetas');
-    // Generamos un ID único simple para MockAPI
-    const nuevoId = 'R' + Date.now();
 
-    // Creamos la nueva receta, asegurando que tenga el ID y los valores del body
+    idCounter++; 
+    const nuevoId = 'R' + idCounter;
+
     const nuevaReceta = {
         ...req.body,
         id: nuevoId,
@@ -29,20 +34,18 @@ router.post('/', (req, res) => {
         votos: 0
     };
 
-    recetas.push(nuevaReceta); // Añadir a la lista en memoria
-    res.status(201).json(nuevaReceta); // Devolver la receta creada con status 201
+    recetas.push(nuevaReceta); 
+    res.status(201).json(nuevaReceta);//Estatus 201: Creación exitosa
 });
 
-// ==========================================================
-// 3. PUT /recetas/:id (Valorar/Actualizar)
-// ==========================================================
+// 3. PUT/ACTUALIZAR /recetas/:id (Valorar/Actualizar)
 router.put('/:id', (req, res) => {
     console.log(`PUT /recetas/${req.params.id}`);
     const id = req.params.id;
     const index = recetas.findIndex(r => r.id === id);
 
     if (index !== -1) {
-        // Sobrescribir la receta existente con el body (que contiene puntuacion y votos nuevos)
+        // Sobrescribir la receta existente con los nuevos datos
         recetas[index] = { ...recetas[index], ...req.body };
         res.json(recetas[index]); // Devolver la receta actualizada
     } else {
@@ -50,9 +53,7 @@ router.put('/:id', (req, res) => {
     }
 });
 
-// ==========================================================
 // 4. DELETE /recetas/:id (Borrar)
-// ==========================================================
 router.delete('/:id', (req, res) => {
     console.log(`DELETE /recetas/${req.params.id}`);
     const id = req.params.id;

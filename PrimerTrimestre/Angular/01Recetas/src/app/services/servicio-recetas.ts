@@ -10,7 +10,7 @@ export class ServicioRecetas {
   private apiUrl = 'http://localhost:3000/recetas';
 
   private _recetas = new BehaviorSubject<RecetaModel[]>([]);
-  private _filtroCategoria = new BehaviorSubject<string>(''); // Fuente de datos para el filtro de categoría
+  private _filtroCategoria = new BehaviorSubject<string>(''); // Filtro de categoría: Primero, Segundo...
 
   // Observable que combina la lista de recetas y el filtro de categoría
   public recetas$: Observable<RecetaModel[]> = combineLatest([
@@ -34,7 +34,7 @@ export class ServicioRecetas {
     this._filtroCategoria.next(categoria);
   }
 
-  // 1. Devuelve el Observable de la lista de recetas
+  // 1. Devuelve la última lista de recetas
   getRecetas(): Observable<RecetaModel[]> {
     return this.recetas$;
   }
@@ -42,7 +42,7 @@ export class ServicioRecetas {
   // 1.1 Cargar todas
   cargarRecetas() {
     this.http.get<RecetaModel[]>(this.apiUrl).subscribe((data) => {
-      this._recetas.next(data); // Actualizamos el estado
+      this._recetas.next(data); // Guarda el dato en el almacén de estado y lo reparte a todos los suscriptores (Actualiza la lista)
     });
   }
 
@@ -51,8 +51,9 @@ export class ServicioRecetas {
     // Inicializamos votos a 0
     const nueva = { ...receta, puntuacion: 0, votos: 0 };
     this.http.post<RecetaModel>(this.apiUrl, nueva).subscribe((recetaCreada) => {
-      // Añadimos la nueva receta a la lista actual
+      // Obtenemos la lista actual de recetas
       const listaActual = this._recetas.value;
+      // Añadimos la nueva receta a la lista actual
       this._recetas.next([...listaActual, recetaCreada]);
     });
   }
