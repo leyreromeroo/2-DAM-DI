@@ -1,4 +1,4 @@
-<div class="modal fade" id="crearRecetaModal" tabindex="-1" aria-labelledby="crearRecetaLabel" aria-hidden="true">
+<div class="modal fade" id="crearRecetaModal" #modalRef tabindex="-1" aria-labelledby="crearRecetaLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -6,7 +6,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="nuevaRecetaForm" class="row g-3 needs-validation mb-5" (ngSubmit)="onSubmit()">
+        <form [formGroup]="nuevaRecetaForm" class="row g-3 needs-validation" (ngSubmit)="onSubmit()">
           <h2>Nueva Receta</h2>
 
           <div class="col-12 position-relative">
@@ -52,14 +52,12 @@
           @if (imagenPreview) {
                <div class="col-12">
                 <label class="form-label">Vista previa:</label><br><br>
-                  <img [src]="imagenPreview" class="img-fluid rounded border" style="max-height: 200px;"
-              alt="Vista previa">
+                  <img [src]="imagenPreview" class="img-fluid rounded border" style="max-height: 200px;" alt="Vista previa">
                </div>
           }
 
            <div class="col-12">
-             <button type="submit" class="btn btn btn-light" [disabled]="nuevaRecetaForm.invalid"
-              data-bs-dismiss="modal">
+             <button type="submit" class="btn btn btn-light">
                 Guardar Receta
             </button>
           </div>               
