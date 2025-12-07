@@ -4,12 +4,19 @@ Este es un proyecto front-end desarrollado con **Angular**, diseñado para **ges
 
 ---
 
-## Características
+## Características Principales
 
-- **Listado de Recetas**: Navegación por una lista de todas las recetas disponibles.  
-- **Detalle de Receta**: Visualización de ingredientes, pasos y notas específicas.  
-- **Diseño Responsivo**: Interfaz adaptada para verse bien en dispositivos móviles y de escritorio.  
-- **Tecnología Moderna**: Implementación utilizando componentes funcionales y buenas prácticas de Angular.  
+Hemos mejorado las características iniciales implementando un patrón de **Gestión de Estado Reactiva** y un servidor de datos simulado.
+
+* **Listado de Recetas**: Visualiza y navega por una lista de todas las recetas disponibles.
+* **Gestión de Estado (RxJS)**: Utiliza el patrón `BehaviorSubject` para manejar el estado de las recetas de forma centralizada. Los datos se actualizan automáticamente en todos los componentes tras crear, votar o eliminar, garantizando un flujo de datos reactivo y eficiente.
+* **Sistema de Filtrado Completo**:
+    * **Búsqueda por Título.**
+    * **Filtro por Valoración Mínima** (Rating).
+    * **Filtro por Categoría** (Picar, Primeros, Segundos, Postres) activado desde el menú de navegación. Toda la lógica de filtrado se realiza en el frontend para una experiencia de usuario instantánea.
+* **Simulación de Backend (Mock API)**: Incluye un servidor local basado en **Express.js** que simula las operaciones **CRUD** (Crear, Leer, Actualizar, Borrar) sobre un *array* de recetas en memoria.
+* **Diseño Responsivo**: Interfaz adaptada para verse bien en dispositivos móviles y de escritorio (usando **Bootstrap**).
+* **Tecnología Moderna**: Implementación utilizando la última sintaxis de Angular y **RxJS** para la reactividad.
 
 ---
 
@@ -17,14 +24,15 @@ Este es un proyecto front-end desarrollado con **Angular**, diseñado para **ges
 
 Necesitarás tener instalados los siguientes programas en tu computadora:
 
-- **Node.js** y **npm** (o Yarn)  
-- **Angular CLI** (Interfaz de Línea de Comandos de Angular)  
+-   **Node.js** y **npm** (o Yarn)
+-   **Angular CLI** (Interfaz de Línea de Comandos de Angular)
 
 Puedes instalar Angular CLI globalmente con el siguiente comando si aún no lo tienes:
 
 ```bash
 npm install -g @angular/cli
 ```
+
 ## Instalación y Ejecución
 
 Sigue estos pasos para descargar, instalar las dependencias y ejecutar la aplicación en tu entorno local.
@@ -47,20 +55,24 @@ ng serve
 
 4. Abre tu navegador y navega a `http://localhost:4200/` para acceder a la aplicación.
 
-## Uso
+## Uso de la Aplicación
 
-La aplicación Recetas de Leyre permite a los usuarios ver, crear y eliminar recetas. A continuación se explica cómo usar las funciones principales:
+La aplicación permite a los usuarios interactuar con la lista de recetas de forma reactiva.
 
-1. **Ver Recetas**:
-   - La aplicación muestra una lista de recetas en la página principal.
-   - Puedes filtrar las recetas por categoría usando el menú de navegación.
+1.  **Ver y Filtrar Recetas**:
+    * La aplicación muestra la lista inicial cargada desde el Mock API.
+    * Puedes usar el campo **"Buscar receta"** o el filtro de **Valoración Mínima**.
+    * Usa el menú desplegable **"Recetas"** en la navegación y haz clic en una categoría (`Picar`, `Primeros`, etc.) para filtrar instantáneamente la lista.
 
-2. **Crear una Nueva Receta**:
-   - Haz clic en el botón "Crear receta" en el menú de navegación para abrir el modal de creación de recetas.
-   - Completa el formulario con los detalles de la receta y haz clic en "Guardar Receta" para añadirla a la lista.
+2.  **Crear una Nueva Receta**:
+    * Haz clic en **"Crear receta"** para abrir el modal.
+    * Completa el formulario (asegúrate de seleccionar la **Categoría** y subir una imagen en formato **JPG/JPEG**). La receta aparecerá inmediatamente en la lista.
 
-3. **Eliminar una Receta**:
-   - Cada tarjeta de receta tiene un botón "Eliminar receta" que permite borrar la receta correspondiente de la lista.
+3.  **Valorar una Receta**:
+    * Haz clic en las estrellas de cualquier tarjeta para votar. El servicio actualizará el promedio de puntuación y el conteo de votos de forma instantánea.
+
+4.  **Eliminar una Receta**:
+    * Cada tarjeta de receta tiene un botón **"X"** (Eliminar) que borra la receta del servidor simulado y actualiza la lista.
 
 ## Estructura de Componentes
 
