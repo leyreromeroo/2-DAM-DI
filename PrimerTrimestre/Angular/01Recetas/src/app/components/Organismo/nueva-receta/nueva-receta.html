@@ -1,4 +1,3 @@
-<!-- Lo ponemos en el mismo html del componente -->
 <div class="modal fade" id="crearRecetaModal" tabindex="-1" aria-labelledby="crearRecetaLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -7,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
-                <!-- Aquí va el formulario -->
+                <!-- Formulario -->
                 <form [formGroup]="nuevaRecetaForm" class="row g-3 needs-validation mb-5" (ngSubmit)="onSubmit()">
                     <h2>Nueva Receta</h2>
 

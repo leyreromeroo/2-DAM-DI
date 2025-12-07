@@ -1,0 +1,16 @@
+/* src/styles.scss */
+
+html, body {
+  // Asegura que el navegador respeta el alto de la ventana
+  height: 100%; 
+  margin: 0;
+  padding: 0;
+}
+
+app-root {
+  // Configura el contenedor principal como Flexbox en columna.
+  display: flex;
+  flex-direction: column;
+  // min-height: 100vh asegura que, si el contenido es corto, al menos ocupe la vista completa.
+  min-height: 100vh;
+}

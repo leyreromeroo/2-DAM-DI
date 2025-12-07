@@ -1,6 +1,7 @@
-import { Component, Output, EventEmitter} from '@angular/core';
+import { Component} from '@angular/core';
 import { FormControl, ReactiveFormsModule, FormGroup, Validators} from '@angular/forms' ;
 import { RecetaModel } from '../../../models/recetaModel';
+import { ServicioRecetas } from '../../../services/servicio-recetas';
 
 
 @Component({
@@ -11,7 +12,8 @@ import { RecetaModel } from '../../../models/recetaModel';
 })
 export class NuevaReceta {
   private contador: number = 5; 
-
+  constructor(private recetasService: ServicioRecetas) {}
+  
   nuevaRecetaForm = new FormGroup({
     id: new FormControl<string>(''), 
     titulo: new FormControl('', Validators.required),
@@ -21,8 +23,6 @@ export class NuevaReceta {
   });
 
   imagenPreview: string | ArrayBuffer | null = null;
-
-  @Output() recetaCreada = new EventEmitter<RecetaModel>();
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];
@@ -65,10 +65,13 @@ export class NuevaReceta {
       ingredientes: (formValues.ingredientes ?? '')
         .split(/[\n,]+/)
         .map(i => i.trim()) 
-        .filter(i => i.length > 0) 
+        .filter(i => i.length > 0)
+      ,
+      puntuacion: 0,
+      votos: 0
     };
 
-    this.recetaCreada.emit(nuevaReceta);
+    this.recetasService.crearReceta(nuevaReceta);
 
     console.log(`¡Receta "${nuevaReceta.titulo}" creada con éxito! ID: ${nuevoId}`);
     

@@ -16,18 +16,20 @@ import { Subscription } from 'rxjs';
 })
 export class Recetas implements OnInit {
 
-  private subscriptionUpdate: Subscription | null = null;
   constructor(private recetasService: ServicioRecetas) {}
 
   // Estado
-  recetas: RecetaModel[] = []; // Todas las recetas de la API
-  recetasFiltradas: RecetaModel[] = []; // Las que mostramos
+  recetas: RecetaModel[] = [];
+  recetasFiltradas: RecetaModel[] = []; 
   
   // Filtros
   filtroTitulo: string = '';
   filtroMinimoEstrellas: number = 0;
 
+  //Se hace la suscripción al cargar el componente
   ngOnInit() {
+    // getRecetas() devuelve el BehaviorSubject. Cada vez que el servicio hace next(), 
+     // este bloque se ejecuta, actualizando la lista y reaplicando los filtros.
     this.cargarRecetas();
   }
 
@@ -58,30 +60,10 @@ export class Recetas implements OnInit {
   }
 
   // Acciones
-  onDelete(id: string) {
-    this.recetasService.borrarReceta(id).subscribe(() => {
-      this.recetas = this.recetas.filter(r => r.id !== id);
-      this.aplicarFiltros();
-    });
-  }
-
-  onVotar(receta: RecetaModel, puntos: number) {
-    this.recetasService.valorarReceta(receta, puntos).subscribe(recetaActualizada => {
-      // Actualizamos la lista local con el nuevo dato de la API
-      const index = this.recetas.findIndex(r => r.id === receta.id);
-      if (index !== -1) {
-        this.recetas[index] = recetaActualizada;
-        this.aplicarFiltros(); // Reaplicar filtros por si cambia el orden o visibilidad
-      }
-    });
-  }
-  
   agregarNuevaReceta(datos: any) {
-     // Asegúrate de inicializar puntuacion y votos en 0 al crear
+     // Inicializar puntuacion y votos en 0 al crear
      const nuevaReceta = { ...datos, puntuacion: 0, votos: 0 };
-     this.recetasService.crearReceta(nuevaReceta).subscribe(r => {
-        this.recetas.push(r);
-        this.aplicarFiltros();
-     });
+     // Llama al servicio y el servicio actualizará el estado (y la suscripción del componente) automáticamente.
+     this.recetasService.crearReceta(nuevaReceta);
   }
 }

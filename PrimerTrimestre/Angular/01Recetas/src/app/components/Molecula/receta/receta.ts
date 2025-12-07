@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, input, Output, output } from '@angular/core';
+import { Component, Input, input} from '@angular/core';
 import { RecetaModel } from '../../../models/recetaModel';
 import { CommonModule } from '@angular/common';
+import { ServicioRecetas } from '../../../services/servicio-recetas';
+
 
 @Component({
   selector: 'app-receta',
@@ -10,11 +12,18 @@ import { CommonModule } from '@angular/common';
 })
 export class Receta {
   
-  @Input() recetaModel!: RecetaModel;
+  public readonly Math = Math;
+  constructor(private recetasService: ServicioRecetas) {}
 
-  @Output() clickEliminarReceta: EventEmitter<string> = new EventEmitter<string>();
+  //@Input() recetaModel!: RecetaModel;
+  recetaModel = input.required<RecetaModel>();
 
-  onEliminarReceta() {
-    this.clickEliminarReceta.emit(this.recetaModel.id);
+  onEliminar() {
+    //Al utilizar la forma más nueva de Input, se vuelve recetaModel() en una función y se accede a ella con ()
+    this.recetasService.borrarReceta(this.recetaModel().id);
+  }
+
+  onVotar(puntos: number) {
+    this.recetasService.valorarReceta(this.recetaModel(), puntos);
   }
 }

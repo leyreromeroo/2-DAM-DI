@@ -10,7 +10,7 @@ export class ServicioRecetas {
   
   
   // URL de ejemplo de MockAPI (cámbiala por la tuya propia)
-  private apiUrl = 'https://660...mockapi.io/api/v1/recetas'; 
+  private apiUrl = 'http://localhost:3000/recetas';
 
   // ESTADO: Aquí guardamos la lista actual de recetas
   private _recetas = new BehaviorSubject<RecetaModel[]>([]);
@@ -22,7 +22,12 @@ export class ServicioRecetas {
     this.cargarRecetas();
   }
 
-  // 1. Cargar todas
+  // 1. Devuelve el Observable de la lista de recetas
+  getRecetas(): Observable<RecetaModel[]> {
+    return this.recetas$;
+  }
+
+  // 1.1 Cargar todas
   cargarRecetas() {
     this.http.get<RecetaModel[]>(this.apiUrl).subscribe(data => {
       this._recetas.next(data); // Actualizamos el estado
@@ -52,7 +57,6 @@ export class ServicioRecetas {
 
   // 4. Valorar (Llamado desde el hijo)
   valorarReceta(receta: RecetaModel, nuevaPuntuacion: number) {
-    // Lógica matemática
     const totalPuntos = receta.puntuacion * receta.votos;
     const nuevosVotos = receta.votos + 1;
     const nuevoPromedio = (totalPuntos + nuevaPuntuacion) / nuevosVotos;

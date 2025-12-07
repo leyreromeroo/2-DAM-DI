@@ -1,2 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 @import "bootstrap/dist/css/bootstrap.min.css";
+
+/* src/styles.scss */
+
+html, body {
+  height: 100%; 
+  margin: 0;
+  padding: 0;
+}
+
+app-root {
+  display: flex;         /* Habilita Flexbox */
+  flex-direction: column; /* Alinea los hijos verticalmente */
+  min-height: 100vh;      /* Asegura que ocupa el alto total de la vista */
+}
