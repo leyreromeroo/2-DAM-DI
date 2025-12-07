@@ -2,7 +2,7 @@
     {
         "id": "R1",
         "titulo": "Quesadillas de Pollo y Verduras",
-        "foto": "public/images.jfif",
+        "foto": "http://hips.hearstapps.com/hmg-prod/images/delish-202102-chickentacohack-069-1615561394.jpg",
         "ingredientes": ["Tortillas de trigo", "Pollo desmenuzado", "Queso cheddar", "Lechuga", "Tomate"],
         "puntuacion": 4.5,
         "votos": 12
@@ -10,7 +10,7 @@
     {
         "id": "R2",
         "titulo": "Ñoquis de Patata con Salchicha",
-        "foto": "public/noquis-con-salchicha-elle-gourmet-681713bbcda42.avif",
+        "foto": "https://hips.hearstapps.com/hmg-prod/images/easy-dinner-ideas-crispy-gnocchi-with-sausage-1674488774.jpg?crop=0.847xw:0.848xh;0.0867xw,0.0912xh",
         "ingredientes": ["Ñoquis", "Carne de salchicha italiana", "Mantequilla", "Salvia", "Pimienta"],
         "puntuacion": 4.8,
         "votos": 8
@@ -18,7 +18,7 @@
     {
         "id": "R3",
         "titulo": "Penne Rigate a la Puttanesca",
-        "foto": "public/Recetas-faciles-de-cocinar-y-sobrevivir-en-casa-al-coronavirus_2.jpg",
+        "foto": "https://www.recetasnestle.com.co/sites/default/files/styles/recipe_detail_desktop_new/public/srh_recipes/090a393d160676ea071b92148a0b01db.jpg?itok=d3d-Vc1I",
         "ingredientes": ["Penne pasta", "Tomate", "Alcaparras", "Aceitunas negras", "Anchoas", "Ajo"],
         "puntuacion": 4.2,
         "votos": 15
@@ -26,7 +26,7 @@
     {
         "id": "R4",
         "titulo": "Tortilla Rellena de Jamón y Queso",
-        "foto": "public/bocadillo-sin-pan-de-tortilla-con-jamon-queso-y-canonigos_4dc8baa9_250926121250_900x900.webp",
+        "foto": "https://content.elmueble.com/medio/2025/07/04/sandwich-de-tortillas_4dc8baa9_250704161901_1125x1500.webp",
         "ingredientes": ["Huevos", "Jamón serrano", "Queso", "Canónigos", "Aceite"],
         "puntuacion": 4.6,
         "votos": 10

@@ -17,5 +17,5 @@ app.get('/', (req, res) => {
 // Levantar el servidor
 const PORT = 3000;
 app.listen(PORT, () => {
-    console.log(`Mock API levantada en http://localhost:${port}`);
+    console.log(`Mock API levantada en http://localhost:${PORT}`);
 });
