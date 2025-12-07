@@ -1,18 +1,21 @@
 const express = require('express');
 const cors = require('cors');
+const recetasRouter = require('./routes/recetas');// Cargar el nuevo router
+
 const app = express();
-const PORT = 3000;
+app.use(express.json());// Permite a Express leer JSON en peticiones POST/PUT
+app.use(cors());// Habilita la comunicación entre el front(puerto de Angular 4200) y el mock-api(puerto de la API 3000)
 
-app.use(cors());
-app.use(express.json());
+// Usar el nuevo router en la ruta '/recetas'
+app.use('/recetas', recetasRouter);
 
-app.use('/pizza', require('./routes/pizzas'));
-app.use('/order', require('./routes/orders'));
-
+//Verificación de que el servidor funciona
 app.get('/', (req, res) => {
   res.send('Mock API corriendo dentro del proyecto Angular 🚀');
 });
 
+// Levantar el servidor
+const PORT = 3000;
 app.listen(PORT, () => {
-  console.log(`Mock API levantada en http://localhost:${PORT}`);
+    console.log(`Mock API levantada en http://localhost:${port}`);
 });

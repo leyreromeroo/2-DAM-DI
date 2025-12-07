@@ -1,0 +1,34 @@
+[
+    {
+        "id": "R1",
+        "titulo": "Quesadillas de Pollo y Verduras",
+        "foto": "public/images.jfif",
+        "ingredientes": ["Tortillas de trigo", "Pollo desmenuzado", "Queso cheddar", "Lechuga", "Tomate"],
+        "puntuacion": 4.5,
+        "votos": 12
+    },
+    {
+        "id": "R2",
+        "titulo": "Ñoquis de Patata con Salchicha",
+        "foto": "public/noquis-con-salchicha-elle-gourmet-681713bbcda42.avif",
+        "ingredientes": ["Ñoquis", "Carne de salchicha italiana", "Mantequilla", "Salvia", "Pimienta"],
+        "puntuacion": 4.8,
+        "votos": 8
+    },
+    {
+        "id": "R3",
+        "titulo": "Penne Rigate a la Puttanesca",
+        "foto": "public/Recetas-faciles-de-cocinar-y-sobrevivir-en-casa-al-coronavirus_2.jpg",
+        "ingredientes": ["Penne pasta", "Tomate", "Alcaparras", "Aceitunas negras", "Anchoas", "Ajo"],
+        "puntuacion": 4.2,
+        "votos": 15
+    },
+    {
+        "id": "R4",
+        "titulo": "Tortilla Rellena de Jamón y Queso",
+        "foto": "public/bocadillo-sin-pan-de-tortilla-con-jamon-queso-y-canonigos_4dc8baa9_250926121250_900x900.webp",
+        "ingredientes": ["Huevos", "Jamón serrano", "Queso", "Canónigos", "Aceite"],
+        "puntuacion": 4.6,
+        "votos": 10
+    }
+]
