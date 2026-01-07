@@ -7,7 +7,7 @@ import { BehaviorSubject, Observable, combineLatest, map } from 'rxjs';
   providedIn: 'root',
 })
 export class ServicioRecetas {
-  private apiUrl = 'http://localhost:3000/recetas';
+  private apiUrl = 'http://127.0.0.1:8000/api/recetas';
 
   private _recetas = new BehaviorSubject<RecetaModel[]>([]);
   private _filtroCategoria = new BehaviorSubject<string>(''); // Filtro de categoría: Primero, Segundo...
