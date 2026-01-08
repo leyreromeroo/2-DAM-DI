@@ -1,0 +1,7 @@
+{
+  "name": "firstDemo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

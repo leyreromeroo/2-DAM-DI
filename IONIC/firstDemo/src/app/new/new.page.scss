@@ -1,0 +1,101 @@
+:host {
+	--ion-background-color: #f5f7fb;
+}
+
+.card-list {
+	padding: 16px;
+}
+
+.card-item {
+	--inner-padding-end: 16px;
+	--inner-padding-start: 16px;
+	margin-bottom: 12px;
+	border-radius: 12px;
+	background: #ffffff;
+	box-shadow: 0 6px 18px rgba(20, 30, 50, 0.06);
+	align-items: center;
+}
+
+.card-title {
+	margin: 0 0 4px 0;
+	font-weight: 600;
+}
+
+.card-sub {
+	margin: 0;
+	font-size: 0.85rem;
+	color: rgba(0,0,0,0.55);
+}
+
+ion-fab-button {
+	--background: var(--ion-color-primary);
+	--box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+ion-icon[slot="end"] {
+	color: rgba(0,0,0,0.35);
+}
+
+/* Position FABs explicitly so they don't block clicks */
+.fab-bottom {
+	position: fixed;
+	right: 16px;
+	bottom: 16px;
+	z-index: 10000;
+}
+
+.fab-top {
+	position: fixed;
+	right: 16px;
+	bottom: 86px; /* stack above the bottom FAB */
+	z-index: 10001;
+}
+
+.fab-top ion-fab-button {
+	--box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* Cute icon styling */
+.fab-icon {
+	font-size: 22px;
+	color: white;
+	display: inline-block;
+	line-height: 1;
+	will-change: transform;
+	animation: fabPulse 3.5s ease-in-out infinite;
+}
+
+/* Slight press effect */
+ion-fab-button {
+	transition: transform 140ms ease, box-shadow 140ms ease;
+}
+ion-fab-button:active {
+	transform: translateY(2px) scale(0.98);
+}
+
+.fab-top ion-fab-button {
+	--background: var(--ion-color-secondary);
+}
+
+@keyframes fabPulse {
+	0% { transform: scale(1); }
+	50% { transform: scale(1.06); }
+	100% { transform: scale(1); }
+}
+
+/* Ensure FABs sit above content and accept pointer events */
+ion-fab {
+	z-index: 9999;
+	pointer-events: auto;
+}
+
+ion-fab-button {
+	cursor: pointer;
+	pointer-events: auto;
+}
+
+.fab-top {
+	z-index: 10000; /* keep the top one above the bottom if needed */
+}
+
+
