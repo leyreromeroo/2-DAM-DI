@@ -7,22 +7,20 @@ import { BehaviorSubject, Observable, combineLatest, map } from 'rxjs';
   providedIn: 'root',
 })
 export class ServicioRecetas {
-  private apiUrl = 'http://127.0.0.1:8000/api/recetas';
+  private apiUrl = 'http://127.0.0.1:8000/api';
 
   private _recetas = new BehaviorSubject<RecetaModel[]>([]);
-  private _filtroCategoria = new BehaviorSubject<string>(''); // Filtro de categoría: Primero, Segundo...
+  private _filtroCategoria = new BehaviorSubject<number | null>(null); // Filtro por ID de tipo
 
-  // Observable que combina la lista de recetas y el filtro de categoría
   public recetas$: Observable<RecetaModel[]> = combineLatest([
-    this._recetas.asObservable(), // Fuente 1: La lista completa de recetas
-    this._filtroCategoria.asObservable(), // Fuente 2: La categoría seleccionada
+    this._recetas.asObservable(),
+    this._filtroCategoria.asObservable(),
   ]).pipe(
-    map(([recetas, categoria]) => {
-      // Si la categoría es una cadena vacía (''), devolvemos la lista completa.
-      if (!categoria) {
+    map(([recetas, categoriaId]) => {
+      if (!categoriaId) {
         return recetas;
-      } // Filtramos la lista cuando se selecciona una categoría
-      return recetas.filter((r) => r.categoria.toLowerCase() === categoria.toLowerCase());
+      }
+      return recetas.filter((r) => r.type.id === categoriaId);
     })
   );
 
@@ -30,61 +28,43 @@ export class ServicioRecetas {
     this.cargarRecetas();
   }
 
-  setFiltroCategoria(categoria: string) {
-    this._filtroCategoria.next(categoria);
+  setFiltroCategoria(categoriaId: number | null) {
+    this._filtroCategoria.next(categoriaId);
   }
 
-  // 1. Devuelve la última lista de recetas
   getRecetas(): Observable<RecetaModel[]> {
     return this.recetas$;
   }
 
-  // 1.1 Cargar todas
   cargarRecetas() {
-    this.http.get<RecetaModel[]>(this.apiUrl).subscribe((data) => {
-      this._recetas.next(data); // Guarda el dato en el almacén de estado y lo reparte a todos los suscriptores (Actualiza la lista)
+    this.http.get<RecetaModel[]>(`${this.apiUrl}/recipes`).subscribe((data) => {
+      this._recetas.next(data);
     });
   }
 
-  // 2. Crear
   crearReceta(receta: any) {
-    // Inicializamos votos a 0
-    const nueva = { ...receta, puntuacion: 0, votos: 0 };
-    this.http.post<RecetaModel>(this.apiUrl, nueva).subscribe((recetaCreada) => {
-      // Obtenemos la lista actual de recetas
-      const listaActual = this._recetas.value;
-      // Añadimos la nueva receta a la lista actual
-      this._recetas.next([...listaActual, recetaCreada]);
+    this.http.post<any>(`${this.apiUrl}/recipes`, receta).subscribe(() => {
+      this.cargarRecetas(); // Refrescar siempre
     });
   }
 
-  // 3. Borrar (Llamado desde el hijo)
-  borrarReceta(id: string) {
-    this.http.delete(`${this.apiUrl}/${id}`).subscribe(() => {
-      // Filtramos la lista para quitar la borrada
-      const listaActual = this._recetas.value;
-      const listaNueva = listaActual.filter((r) => r.id !== id);
-      this._recetas.next(listaNueva); // Notificamos a todos (incluido el padre)
+  borrarReceta(id: number) {
+    this.http.delete(`${this.apiUrl}/recipes/${id}`).subscribe(() => {
+      this.cargarRecetas(); // Refrescar siempre
     });
   }
 
-  // 4. Valorar (Llamado desde el hijo)
-  valorarReceta(receta: RecetaModel, nuevaPuntuacion: number) {
-    const totalPuntos = receta.puntuacion * receta.votos;
-    const nuevosVotos = receta.votos + 1;
-    const nuevoPromedio = (totalPuntos + nuevaPuntuacion) / nuevosVotos;
+  valorarReceta(recipeId: number, rate: number) {
+    this.http.post<any>(`${this.apiUrl}/recipes/${recipeId}/rating/${rate}`, {}).subscribe(() => {
+      this.cargarRecetas(); // Refrescar siempre
+    });
+  }
 
-    const cambios = {
-      puntuacion: Number(nuevoPromedio.toFixed(1)),
-      votos: nuevosVotos,
-    };
+  getTiposReceta(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/recipe-types`);
+  }
 
-    this.http
-      .put<RecetaModel>(`${this.apiUrl}/${receta.id}`, { ...receta, ...cambios })
-      .subscribe((recetaActualizada) => {
-        // Actualizamos esa receta específica en nuestra lista local
-        const lista = this._recetas.value.map((r) => (r.id === receta.id ? recetaActualizada : r));
-        this._recetas.next(lista);
-      });
+  getNutrientes(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/nutrient-types`);
   }
 }
