@@ -1,68 +1,77 @@
-<div class="modal fade" id="crearRecetaModal" #modalRef tabindex="-1" aria-labelledby="crearRecetaLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
+<div class="modal fade" id="crearRecetaModal" #modalRef tabindex="-1" aria-labelledby="crearRecetaLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="crearRecetaLabel">Crear Receta</h5>
+        <h5 class="modal-title" id="crearRecetaLabel">Crear Nueva Receta</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="nuevaRecetaForm" class="row g-3 needs-validation" (ngSubmit)="onSubmit()">
-          <h2>Nueva Receta</h2>
+        <form [formGroup]="nuevaRecetaForm" (ngSubmit)="onSubmit()" class="row g-3">
 
-          <div class="col-12 position-relative">
-            <label for="titulo" class="form-label">Título</label>
-            <input type="text" class="form-control" id="titulo" formControlName="titulo"
-              [class.is-invalid]="nuevaRecetaForm.controls.titulo.invalid && nuevaRecetaForm.controls.titulo.touched"
-              placeholder="Ej: Ensalada de quinoa con aguacate" required>
-            <div class="invalid-feedback">
-              Por favor, introduce un título.
+          <!-- Título y Comensales -->
+          <div class="col-md-8">
+            <label class="form-label">Título</label>
+            <input type="text" class="form-control" formControlName="title" placeholder="Nombre de la receta">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Comensales</label>
+            <input type="number" class="form-control" formControlName="number-diner">
+          </div>
+
+          <!-- Tipo de Receta -->
+          <div class="col-md-12">
+            <label class="form-label">Tipo de Receta</label>
+            <select class="form-select" formControlName="type-id">
+              <option value="">Selecciona tipo...</option>
+              <option *ngFor="let tipo of tiposReceta" [value]="tipo.id">{{ tipo.name }}</option>
+            </select>
+          </div>
+
+          <!-- Ingredientes (FormArray) -->
+          <div class="col-12 mt-4">
+            <h6>Ingredientes</h6>
+            <div formArrayName="ingredients">
+              <div *ngFor="let ing of ingredients.controls; let i=index" [formGroupName]="i" class="input-group mb-2">
+                <input type="text" class="form-control" formControlName="name" placeholder="Nombre">
+                <input type="number" class="form-control" formControlName="quantity" placeholder="Cant.">
+                <input type="text" class="form-control" formControlName="unit" placeholder="Unidad">
+                <button type="button" class="btn btn-outline-danger" (click)="removeIngredient(i)">&times;</button>
+              </div>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-primary" (click)="addIngredient()">+ Añadir
+              Ingrediente</button>
+          </div>
+
+          <!-- Pasos (FormArray) -->
+          <div class="col-12 mt-4">
+            <h6>Pasos de preparación</h6>
+            <div formArrayName="steps">
+              <div *ngFor="let step of steps.controls; let i=index" [formGroupName]="i" class="input-group mb-2">
+                <span class="input-group-text">{{ i + 1 }}</span>
+                <input type="text" class="form-control" formControlName="description"
+                  placeholder="Descripción del paso">
+                <button type="button" class="btn btn-outline-danger" (click)="removeStep(i)">&times;</button>
+              </div>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-primary" (click)="addStep()">+ Añadir Paso</button>
+          </div>
+
+          <!-- Imagen (Placeholder Simulado) -->
+          <div class="col-12 mt-4">
+            <label class="form-label">Imagen de la receta (Opcional)</label>
+            <input type="file" class="form-control" (change)="onFileSelected($event)" accept="image/*">
+            <div *ngIf="imagenPreview" class="mt-2 text-center">
+              <img [src]="imagenPreview" class="img-thumbnail" style="max-height: 150px;">
             </div>
           </div>
 
-          <div class="col-12 position-relative">
-            <label for="categoria" class="form-label">Categoría</label>
-            <select class="form-select" id="categoria" formControlName="categoria" required
-              [class.is-invalid]="nuevaRecetaForm.controls.categoria.invalid && nuevaRecetaForm.controls.categoria.touched">
-              <option value="" disabled>Selecciona una categoría...</option>
-              <option value="Picar">Para Picar</option>
-              <option value="Primeros">Primeros</option>
-              <option value="Segundos">Segundos</option>
-              <option value="Postres">Postres</option>
-                                     
-            </select>
-             <div class="invalid-feedback">Por favor, selecciona una categoría.</div>             
+          <div class="col-12 modal-footer mt-4">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Guardar Receta</button>
           </div>
-
-          <div class="col-12 position-relative">
-              <label for="ingredientes" class="form-label">Ingredientes</label>
-               <textarea class="form-control" id="ingredientes" rows="4" formControlName="ingredientes"
-              [class.is-invalid]="nuevaRecetaForm.controls.ingredientes.invalid && nuevaRecetaForm.controls.ingredientes.touched"
-              placeholder="Ej: quinoa, aguacate, tomate cherry, limón..." required></textarea>
-              <div class="invalid-feedback">Escribe los ingredientes.</div>
-          </div>
-
-           <div class="col-12 position-relative">
-              <label for="foto" class="form-label">Imagen</label>
-              <input type="file" class="form-control" id="foto" accept="image/jpeg, image/jpg"
-              [class.is-invalid]="nuevaRecetaForm.controls.foto.invalid && nuevaRecetaForm.controls.foto.touched"      
-              (change)="onFileSelected($event)" required>
-              <div class="invalid-feedback">Por favor, selecciona una imagen.</div>
-          </div>
-
-          @if (imagenPreview) {
-               <div class="col-12">
-                <label class="form-label">Vista previa:</label><br><br>
-                  <img [src]="imagenPreview" class="img-fluid rounded border" style="max-height: 200px;" alt="Vista previa">
-               </div>
-          }
-
-           <div class="col-12">
-             <button type="submit" class="btn btn btn-light">
-                Guardar Receta
-            </button>
-          </div>               
-        </form>           
-      </div>      
-    </div>  
+        </form>
+      </div>
+    </div>
   </div>
 </div>

@@ -21,8 +21,22 @@ export class NuevaReceta implements OnInit {
       'type-id': ['', Validators.required],
       ingredients: this.fb.array([], Validators.required),
       steps: this.fb.array([], Validators.required),
-      nutrients: this.fb.array([])
+      nutrients: this.fb.array([]),
+      foto: [null] // Para validación en plantilla
     });
+  }
+
+  imagenPreview: string | null = null;
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagenPreview = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   ngOnInit(): void {

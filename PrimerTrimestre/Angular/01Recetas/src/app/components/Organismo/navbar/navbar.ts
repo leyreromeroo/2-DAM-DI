@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { ServicioRecetas } from '../../../services/servicio-recetas';
 
 
@@ -9,10 +9,11 @@ import { ServicioRecetas } from '../../../services/servicio-recetas';
   styleUrl: './navbar.scss'
 })
 export class Navbar {
- constructor(private recetasService: ServicioRecetas) {}
+  constructor(private recetasService: ServicioRecetas) { }
 
-    filtrarPorCategoria(categoria: string) {
-    this.recetasService.setFiltroCategoria(categoria); 
-}
+  filtrarPorCategoria(categoria: string | number | null) {
+    const id = categoria === null ? null : Number(categoria);
+    this.recetasService.setFiltroCategoria(id);
+  }
 }
 
