@@ -5,7 +5,8 @@
     &times;
   </button>
 
-  <img src="https://placehold.co/600x400?text=Receta" class="card-img-top" [alt]="recetaModel().title">
+  <img [src]="recetaModel().foto || 'https://placehold.co/600x400?text=Receta'" class="card-img-top"
+    [alt]="recetaModel().title">
 
   <div class="card-body d-flex flex-column">
     <h5 class="card-title">{{ recetaModel().title }}</h5>

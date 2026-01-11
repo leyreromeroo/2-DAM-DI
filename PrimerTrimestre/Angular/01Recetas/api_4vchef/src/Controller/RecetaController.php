@@ -42,6 +42,7 @@ class RecetaController extends AbstractController
             $data[] = [
                 'id' => $receta->getId(),
                 'title' => $receta->getTitulo(),
+                'foto' => $receta->getFoto(),
                 'number-diner' => $receta->getComensales(),
                 'type' => [
                     'id' => $receta->getTipo()->getId(),
@@ -89,6 +90,7 @@ class RecetaController extends AbstractController
         return $this->json([
             'id' => $receta->getId(),
             'title' => $receta->getTitulo(),
+            'foto' => $receta->getFoto(),
             'number-diner' => $receta->getComensales(),
             'type' => [
                 'id' => $receta->getTipo()->getId(),

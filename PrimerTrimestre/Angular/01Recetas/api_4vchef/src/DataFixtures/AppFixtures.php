@@ -53,6 +53,7 @@ class AppFixtures extends Fixture
         $recetasMock = [
             [
                 "titulo" => "Quesadillas de Pollo y Verduras",
+                "foto" => "http://hips.hearstapps.com/hmg-prod/images/delish-202102-chickentacohack-069-1615561394.jpg",
                 "categoria" => "Picar",
                 "ingredientes" => ["Tortillas de trigo", "Pollo desmenuzado", "Queso cheddar"],
                 "pasos" => ["Calentar sartén", "Añadir pollo y queso", "Doblar y dorar"],
@@ -60,6 +61,7 @@ class AppFixtures extends Fixture
             ],
             [
                 "titulo" => "Ñoquis de Patata con Salchicha",
+                "foto" => "https://hips.hearstapps.com/hmg-prod/images/easy-dinner-ideas-crispy-gnocchi-with-sausage-1674488774.jpg?crop=0.847xw:0.848xh;0.0867xw,0.0912xh",
                 "categoria" => "Primeros",
                 "ingredientes" => ["Ñoquis", "Salchicha italiana", "Mantequilla", "Salvia"],
                 "pasos" => ["Hervir agua", "Cocer ñoquis", "Saltear con mantequilla y salvia"],
@@ -67,6 +69,7 @@ class AppFixtures extends Fixture
             ],
             [
                 "titulo" => "Penne Rigate a la Puttanesca",
+                "foto" => "https://www.recetasnestle.com.co/sites/default/files/styles/recipe_detail_desktop_new/public/srh_recipes/090a393d160676ea071b92148a0b01db.jpg?itok=d3d-Vc1I",
                 "categoria" => "Primeros",
                 "ingredientes" => ["Penne", "Tomate", "Alcaparras", "Aceitunas"],
                 "pasos" => ["Cocer pasta", "Preparar salsa sofrito", "Mezclar y servir"],
@@ -74,6 +77,7 @@ class AppFixtures extends Fixture
             ],
             [
                 "titulo" => "Tortilla Rellena de Jamón y Queso",
+                "foto" => "https://content.elmueble.com/medio/2025/07/04/sandwich-de-tortillas_4dc8baa9_250704161901_1125x1500.webp",
                 "categoria" => "Segundos",
                 "ingredientes" => ["Huevos", "Jamón", "Queso"],
                 "pasos" => ["Batir huevos", "Cuajar tortilla", "Rellenar y cerrar"],
@@ -84,6 +88,7 @@ class AppFixtures extends Fixture
         foreach ($recetasMock as $rData) {
             $receta = new Receta();
             $receta->setTitulo($rData['titulo']);
+            $receta->setFoto($rData['foto']);
             $receta->setComensales(2);
             $receta->setTipo($tiposEntities[$rData['categoria']]);
             $receta->setDeleted(false);
