@@ -59,13 +59,14 @@ class RecipeService
         if (!empty($data['nutrients'])) {
             foreach ($data['nutrients'] as $nutData) {
                 $tipoNutriente = $this->nutrienteRepo->find($nutData['type-id']);
-                if ($tipoNutriente) {
-                    $recetaNutriente = new RecetaNutriente();
-                    $recetaNutriente->setNutriente($tipoNutriente);
-                    $recetaNutriente->setCantidad($nutData['quantity']);
-                    $recetaNutriente->setReceta($receta);
-                    $this->em->persist($recetaNutriente);
+                if (!$tipoNutriente) {
+                    throw new \InvalidArgumentException('Uno de los tipos de nutriente no existe');
                 }
+                $recetaNutriente = new RecetaNutriente();
+                $recetaNutriente->setNutriente($tipoNutriente);
+                $recetaNutriente->setCantidad($nutData['quantity']);
+                $recetaNutriente->setReceta($receta);
+                $this->em->persist($recetaNutriente);
             }
         }
 

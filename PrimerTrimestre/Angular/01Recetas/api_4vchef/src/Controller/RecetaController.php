@@ -65,7 +65,13 @@ class RecetaController extends AbstractController
 
         // Validaciones básicas (pueden Ir a un Validator separado, pero aquí ya aligeran el controller)
         if (empty($data['title']) || empty($data['number-diner'])) {
-            return $this->json(['code' => 400, 'description' => 'Faltan campos obligatorios'], 400);
+            return $this->json(['code' => 400, 'description' => 'El título y el número de comensales son obligatorios'], 400);
+        }
+        if (empty($data['ingredients']) || count($data['ingredients']) < 1) {
+            return $this->json(['code' => 400, 'description' => 'La receta debe tener al menos 1 ingrediente'], 400);
+        }
+        if (empty($data['steps']) || count($data['steps']) < 1) {
+            return $this->json(['code' => 400, 'description' => 'La receta debe tener al menos 1 paso'], 400);
         }
 
         try {
@@ -86,6 +92,13 @@ class RecetaController extends AbstractController
     ): JsonResponse
     {
         $receta = $recetaRepo->findOneBy(['id' => $recipeId, 'deleted' => false]);
+        if (!$receta) {
+            return $this->json(['code' => 404, 'description' => 'Receta no encontrada'], 404);
+        }
+
+        if ($rate < 0 || $rate > 5) {
+            return $this->json(['code' => 400, 'description' => 'El voto debe ser un entero entre 0 y 5'], 400);
+        }
         if (!$receta) {
             return $this->json(['code' => 404, 'description' => 'Receta no encontrada'], 404);
         }
