@@ -2,7 +2,7 @@ export interface RecetaModel {
   id: number;
   title: string;
   foto?: string;
-  number_diner: number;
+  'number-diner': number;
   type: {
     id: number;
     name: string;
