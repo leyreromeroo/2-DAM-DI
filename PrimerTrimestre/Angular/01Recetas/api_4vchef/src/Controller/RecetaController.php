@@ -46,7 +46,7 @@ class RecetaController extends AbstractController
                 'type' => [
                     'id' => $receta->getTipo()->getId(),
                     'name' => $receta->getTipo()->getNombre(),
-                    'description' => $receta->getTipo()->getDescription()
+                    'description' => $receta->getTipo()->getDescripcion()
                 ],
                 'ingredients' => array_map(fn($i) => [
                     'name' => $i->getNombre(),

@@ -19,6 +19,7 @@
   - Validación de existencia de tipos y nutrientes en base de datos.
 - **Sistema de Votación con Control de IP**: Implementación de lógica anti-fraude que limita un voto por usuario/receta.
 - **Borrado Lógico**: Sistema de persistencia que permite ocultar registros (`deleted = true`) sin eliminarlos físicamente de la DB.
+- **Datos Maestros e Iniciales**: Inclusión de fixtures para tipos de receta, nutrientes y recetas base.
 
 ### 🎨 Frontend (Angular 18+)
 - **Gestión de Estado Reactiva**: Uso extensivo de `RxJS` y `BehaviorSubject` para un flujo de datos en tiempo real.
@@ -72,6 +73,7 @@ cd api_4vchef
 composer install
 symfony console doctrine:database:create
 symfony console doctrine:migrations:migrate
+symfony console doctrine:fixtures:load --no-interaction
 symfony serve -d
 ```
 
