@@ -50,7 +50,7 @@ class Ingrediente
 
     public function setCantidad(float $cantidad): static
     {
-        $this->cabtidad = $cabtidad;
+        $this->cantidad = $cantidad;
 
         return $this;
     }
