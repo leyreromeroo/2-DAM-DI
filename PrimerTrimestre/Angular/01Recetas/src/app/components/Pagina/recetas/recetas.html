@@ -1,20 +1,28 @@
 <div class="container mt-3 mb-5 pt-5 ">
   <div class="row mt-4 justify-content-center">
-    <div class="col-12 col-md-10 col-lg-8">
-      <div class="input-group shadow-sm">
-        <span class="input-group-text bg-white border-end-0">
-          <i class="fa-solid fa-magnifying-glass text-muted"></i>
-        </span>
+    <div class="col-12 col-md-11">
+      <div class="d-flex gap-2 align-items-center bg-white p-2 rounded shadow-sm border">
+        <div class="input-group input-group-sm flex-grow-1">
+          <span class="input-group-text bg-transparent border-0"><i class="fa-solid fa-magnifying-glass"></i></span>
+          <input type="text" class="form-control border-0" placeholder="Buscar..." (input)="onFiltrarTexto($event)">
+        </div>
 
-        <input type="text" class="form-control border-start-0" placeholder="Buscar receta..." [value]="filtroTitulo"
-          (input)="onFiltrarTexto($event)" />
+        <input type="number" class="form-control form-control-sm" style="width: 100px;" placeholder="MinCal">
+        <input type="number" class="form-control form-control-sm" style="width: 100px;" placeholder="MaxCal">
 
-        <select class="form-select text-center" style="max-width: 200px;" (change)="onFiltrarRating($event)">
-          <option value="0">⭐ Valoración Mínima</option>
-          <option value="3">3+ Estrellas</option>
-          <option value="4">4+ Estrellas</option>
-          <option value="5">5 Estrellas</option>
+        <select class="form-select form-select-sm" style="width: 150px;" (change)="onFiltrarRating($event)">
+          <option value="0">⭐⭐⭐⭐⭐</option>
+          <option value="1">1+ ★</option>
+          <option value="2">2+ ★</option>
+          <option value="3">3+ ★</option>
+          <option value="4">4+ ★</option>
+          <option value="5">5 ★</option>
         </select>
+
+        <button class="btn btn-sm btn-outline-dark text-nowrap" data-bs-toggle="modal"
+          data-bs-target="#crearRecetaModal">
+          + Add Recipe
+        </button>
       </div>
     </div>
   </div>
