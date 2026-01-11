@@ -7,8 +7,10 @@
           <input type="text" class="form-control border-0" placeholder="Buscar..." (input)="onFiltrarTexto($event)">
         </div>
 
-        <input type="number" class="form-control form-control-sm" style="width: 100px;" placeholder="MinCal">
-        <input type="number" class="form-control form-control-sm" style="width: 100px;" placeholder="MaxCal">
+        <input type="number" class="form-control form-control-sm" style="width: 100px;" placeholder="MinCal"
+          (input)="onFiltrarMinCal($event)">
+        <input type="number" class="form-control form-control-sm" style="width: 100px;" placeholder="MaxCal"
+          (input)="onFiltrarMaxCal($event)">
 
         <select class="form-select form-select-sm" style="width: 150px;" (change)="onFiltrarRating($event)">
           <option value="0">⭐⭐⭐⭐⭐</option>
