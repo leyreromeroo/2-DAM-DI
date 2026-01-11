@@ -1,9 +1,32 @@
 export interface RecetaModel {
-  id: string; 
-  titulo: string;
-  foto: string;
-  categoria: string;
-  ingredientes: string[];
-  puntuacion: number; // Promedio 
-  votos: number;      // Cantidad total de votos 
+  id: number;
+  title: string;
+  number_diner: number;
+  type: {
+    id: number;
+    name: string;
+    description: string;
+  };
+  ingredients: {
+    name: string;
+    quantity: number;
+    unit: string;
+  }[];
+  steps: {
+    order: number;
+    description: string;
+  }[];
+  nutrients: {
+    id: number;
+    type: {
+      id: number;
+      name: string;
+      unit: string;
+    };
+    quantity: number;
+  }[];
+  rating: {
+    'number-votes': number;
+    'rating-avg': number;
+  };
 }
