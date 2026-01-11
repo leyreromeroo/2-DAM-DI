@@ -21,8 +21,8 @@ class MaestrosController extends AbstractController
         foreach ($tipos as $t) {
             $data[] = [
                 'id' => $t->getId(),
-                'nombre' => $t->getNombre(),
-                'descripcion' => $t->getDescripcion()
+                'name' => $t->getNombre(),
+                'description' => $t->getDescripcion()
             ];
         }
 
@@ -39,8 +39,8 @@ class MaestrosController extends AbstractController
         foreach ($nutrientes as $n) {
             $data[] = [
                 'id' => $n->getId(),
-                'nombre' => $n->getNombre(),
-                'unidad' => $n->getUnidad()
+                'name' => $n->getNombre(),
+                'unit' => $n->getUnidad()
             ];
         }
 

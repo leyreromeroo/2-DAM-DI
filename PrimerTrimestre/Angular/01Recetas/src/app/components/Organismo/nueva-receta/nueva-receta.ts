@@ -34,6 +34,7 @@ export class NuevaReceta implements OnInit {
       const reader = new FileReader();
       reader.onload = () => {
         this.imagenPreview = reader.result as string;
+        this.nuevaRecetaForm.patchValue({ foto: this.imagenPreview });
       };
       reader.readAsDataURL(file);
     }
@@ -93,6 +94,7 @@ export class NuevaReceta implements OnInit {
     while (this.ingredients.length) this.ingredients.removeAt(0);
     while (this.steps.length) this.steps.removeAt(0);
     while (this.nutrients.length) this.nutrients.removeAt(0);
+    this.imagenPreview = null;
   }
 }
 

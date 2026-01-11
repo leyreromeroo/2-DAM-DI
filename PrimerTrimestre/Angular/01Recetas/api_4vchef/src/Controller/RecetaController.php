@@ -171,6 +171,7 @@ class RecetaController extends AbstractController
 
         $receta = new Receta();
         $receta->setTitulo($data['title']);
+        $receta->setFoto($data['foto'] ?? null);
         $receta->setComensales($data['number-diner']);
         $receta->setTipo($tipo);
         $receta->setDeleted(false);
