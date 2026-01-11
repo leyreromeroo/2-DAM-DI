@@ -39,39 +39,7 @@ class RecetaController extends AbstractController
 
         $data = [];
         foreach ($recetas as $receta) {
-            $data[] = [
-                'id' => $receta->getId(),
-                'title' => $receta->getTitulo(),
-                'foto' => $receta->getFoto(),
-                'number-diner' => $receta->getComensales(),
-                'type' => [
-                    'id' => $receta->getTipo()->getId(),
-                    'name' => $receta->getTipo()->getNombre(),
-                    'description' => $receta->getTipo()->getDescripcion()
-                ],
-                'ingredients' => array_map(fn($i) => [
-                    'name' => $i->getNombre(),
-                    'quantity' => $i->getCantidad(),
-                    'unit' => $i->getUnidad()
-                ], $receta->getIngredientes()->toArray()),
-                'steps' => array_map(fn($p) => [
-                    'order' => $p->getOrden(),
-                    'description' => $p->getDescripcion()
-                ], $receta->getPasos()->toArray()),
-                'nutrients' => array_map(fn($n) => [
-                    'id' => $n->getId(),
-                    'type' => [
-                        'id' => $n->getNutriente()->getId(),
-                        'name' => $n->getNutriente()->getNombre(),
-                        'unit' => $n->getNutriente()->getUnidad()
-                    ],
-                    'quantity' => $n->getCantidad()
-                ], $receta->getRecetaNutrientes()->toArray()),
-                'rating' => [
-                    'number-votes' => $receta->getValoraciones()->count(),
-                    'rating-avg' => $receta->getPromedioVotos()
-                ]
-            ];
+            $data[] = $this->serialize($receta);
         }
 
         return $this->json($data);
@@ -87,39 +55,7 @@ class RecetaController extends AbstractController
             return $this->json(['code' => 404, 'description' => 'Receta no encontrada'], 404);
         }
 
-        return $this->json([
-            'id' => $receta->getId(),
-            'title' => $receta->getTitulo(),
-            'foto' => $receta->getFoto(),
-            'number-diner' => $receta->getComensales(),
-            'type' => [
-                'id' => $receta->getTipo()->getId(),
-                'name' => $receta->getTipo()->getNombre(),
-                'description' => $receta->getTipo()->getDescripcion()
-            ],
-            'ingredients' => array_map(fn($i) => [
-                'name' => $i->getNombre(),
-                'quantity' => $i->getCantidad(),
-                'unit' => $i->getUnidad()
-            ], $receta->getIngredientes()->toArray()),
-            'steps' => array_map(fn($p) => [
-                'order' => $p->getOrden(),
-                'description' => $p->getDescripcion()
-            ], $receta->getPasos()->toArray()),
-            'nutrients' => array_map(fn($n) => [
-                'id' => $n->getId(),
-                'type' => [
-                    'id' => $n->getNutriente()->getId(),
-                    'name' => $n->getNutriente()->getNombre(),
-                    'unit' => $n->getNutriente()->getUnidad()
-                ],
-                'quantity' => $n->getCantidad()
-            ], $receta->getRecetaNutrientes()->toArray()),
-            'rating' => [
-                'number-votes' => $receta->getValoraciones()->count(),
-                'rating-avg' => $receta->getPromedioVotos()
-            ]
-        ]);
+        return $this->json($this->serialize($receta));
     }
 
     // 3. DELETE (Borrado Lógico)
@@ -134,9 +70,9 @@ class RecetaController extends AbstractController
 
         // Borrado lógico
         $receta->setDeleted(true);
-        $this->em->flush(); // Guardamos el cambio
+        $this->em->flush(); 
 
-        return $this->json(['message' => 'Receta eliminada correctamente'], 200);
+        return $this->json($this->serialize($receta), 200);
     }
 
     // 4. POST Crear Receta (Con validaciones estrictas)
@@ -213,7 +149,7 @@ class RecetaController extends AbstractController
         $this->em->persist($receta);
         $this->em->flush();
 
-        return $this->json(['id' => $receta->getId(), 'title' => $receta->getTitulo()], 201);
+        return $this->json($this->serialize($receta), 201);
     }
 
     // 5. POST Voto (Con control de IP)
@@ -243,12 +179,46 @@ class RecetaController extends AbstractController
         $this->em->persist($valoracion);
         $this->em->flush();
 
-        return $this->json([
+        return $this->json($this->serialize($receta));
+    }
+
+    /**
+     * Helper para cumplir estrictamente con el esquema Recipe del YAML
+     */
+    private function serialize(Receta $receta): array
+    {
+        return [
             'id' => $receta->getId(),
+            'title' => $receta->getTitulo(),
+            'foto' => $receta->getFoto(), // Extensión sobre el YAML original para soportar fotos
+            'number-diner' => $receta->getComensales(),
+            'type' => [
+                'id' => $receta->getTipo()->getId(),
+                'name' => $receta->getTipo()->getNombre(),
+                'description' => $receta->getTipo()->getDescripcion()
+            ],
+            'ingredients' => array_map(fn($i) => [
+                'name' => $i->getNombre(),
+                'quantity' => $i->getCantidad(),
+                'unit' => $i->getUnidad()
+            ], $receta->getIngredientes()->toArray()),
+            'steps' => array_map(fn($p) => [
+                'order' => $p->getOrden(),
+                'description' => $p->getDescripcion()
+            ], $receta->getPasos()->toArray()),
+            'nutrients' => array_map(fn($n) => [
+                'id' => $n->getId(),
+                'type' => [
+                    'id' => $n->getNutriente()->getId(),
+                    'name' => $n->getNutriente()->getNombre(),
+                    'unit' => $n->getNutriente()->getUnidad()
+                ],
+                'quantity' => $n->getCantidad()
+            ], $receta->getRecetaNutrientes()->toArray()),
             'rating' => [
                 'number-votes' => $receta->getValoraciones()->count(),
                 'rating-avg' => $receta->getPromedioVotos()
             ]
-        ]);
+        ];
     }
 }

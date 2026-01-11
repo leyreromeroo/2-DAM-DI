@@ -1,4 +1,4 @@
-# 🍳 4vChef - Plataforma de Gestión de Recetas Full Stack
+# 4vChef - Plataforma de Gestión de Recetas Full Stack
 
 ![4vChef Banner](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
 ![Symfony](https://img.shields.io/badge/Symfony-000000?style=for-the-badge&logo=symfony&logoColor=white)
@@ -96,4 +96,4 @@ Este proyecto sigue la metodología de [Conventional Commits](https://www.conven
 ---
 
 ## Autor
-Desarrollado por **Leyre Romero** como parte del módulo de Diseño de Interfaces (DAM 2).
+Desarrollado por **Leyre Romero** como parte del módulo de Diseño de Interfaces y de Desarrollo Web (DAM 2).
