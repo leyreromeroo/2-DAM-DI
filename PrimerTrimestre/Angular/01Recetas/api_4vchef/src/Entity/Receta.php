@@ -18,7 +18,7 @@ class Receta
     #[ORM\Column(length: 50)]
     private ?string $titulo = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(type: 'text', nullable: true)]
     private ?string $foto = null;
 
     #[ORM\Column]

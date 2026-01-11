@@ -35,7 +35,15 @@
               <div *ngFor="let ing of ingredients.controls; let i=index" [formGroupName]="i" class="input-group mb-2">
                 <input type="text" class="form-control" formControlName="name" placeholder="Nombre">
                 <input type="number" class="form-control" formControlName="quantity" placeholder="Cant.">
-                <input type="text" class="form-control" formControlName="unit" placeholder="Unidad">
+                <select class="form-select" formControlName="unit">
+                  <option value="">Unidad</option>
+                  <option value="g">gramos (g)</option>
+                  <option value="ml">mililitros (ml)</option>
+                  <option value="uds">unidades (uds)</option>
+                  <option value="pizca">pizca/s</option>
+                  <option value="cucharada">cucharada/s</option>
+                  <option value="al gusto">al gusto</option>
+                </select>
                 <button type="button" class="btn btn-outline-danger" (click)="removeIngredient(i)">&times;</button>
               </div>
             </div>
