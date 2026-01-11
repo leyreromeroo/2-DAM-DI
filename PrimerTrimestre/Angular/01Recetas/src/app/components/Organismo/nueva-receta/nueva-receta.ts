@@ -1,84 +1,84 @@
-import { Component} from '@angular/core';
-import { FormControl, ReactiveFormsModule, FormGroup, Validators} from '@angular/forms' ;
-import { RecetaModel } from '../../../models/recetaModel';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, ReactiveFormsModule, FormGroup, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { ServicioRecetas } from '../../../services/servicio-recetas';
-
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-nueva-receta',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './nueva-receta.html',
   styleUrl: './nueva-receta.scss'
 })
-export class NuevaReceta {
-  private contador: number = 5; 
-  constructor(private recetasService: ServicioRecetas) {}
-  
-  nuevaRecetaForm = new FormGroup({
-    id: new FormControl<string>(''), 
-    titulo: new FormControl('', Validators.required),
-    // Usamos string|ArrayBuffer|null porque File Reader devuelve esto
-    foto: new FormControl<string | ArrayBuffer | null>(null, Validators.required),
-    categoria: new FormControl('', Validators.required), 
-    ingredientes: new FormControl('', Validators.required) 
-  });
+export class NuevaReceta implements OnInit {
+  tiposReceta: any[] = [];
+  tiposNutriente: any[] = [];
+  nuevaRecetaForm: FormGroup;
 
-  imagenPreview: string | ArrayBuffer | null = null;
+  constructor(private recetasService: ServicioRecetas, private fb: FormBuilder) {
+    this.nuevaRecetaForm = this.fb.group({
+      title: ['', Validators.required],
+      'number-diner': [1, [Validators.required, Validators.min(1)]],
+      'type-id': ['', Validators.required],
+      ingredients: this.fb.array([], Validators.required),
+      steps: this.fb.array([], Validators.required),
+      nutrients: this.fb.array([])
+    });
+  }
 
-  onFileSelected(event: any): void {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      
-      reader.onload = () => {
-        this.imagenPreview = reader.result;
-        this.nuevaRecetaForm.controls.foto.setValue(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    } else {
-        // Manejar el caso de que el usuario cancele la selección
-        this.nuevaRecetaForm.controls.foto.setValue(null);
-        this.imagenPreview = null;
-    }
-}
+  ngOnInit(): void {
+    this.recetasService.getTiposReceta().subscribe(tipos => this.tiposReceta = tipos);
+    this.recetasService.getNutrientes().subscribe(nutrientes => this.tiposNutriente = nutrientes);
+  }
 
-  // Se llama con (ngSubmit)="onSubmit()" en el HTML
+  get ingredients() { return this.nuevaRecetaForm.get('ingredients') as FormArray; }
+  get steps() { return this.nuevaRecetaForm.get('steps') as FormArray; }
+  get nutrients() { return this.nuevaRecetaForm.get('nutrients') as FormArray; }
+
+  addIngredient() {
+    this.ingredients.push(this.fb.group({
+      name: ['', Validators.required],
+      quantity: [0, Validators.required],
+      unit: ['', Validators.required]
+    }));
+  }
+
+  removeIngredient(index: number) { this.ingredients.removeAt(index); }
+
+  addStep() {
+    this.steps.push(this.fb.group({
+      order: [this.steps.length + 1],
+      description: ['', Validators.required]
+    }));
+  }
+
+  removeStep(index: number) { this.steps.removeAt(index); }
+
+  addNutrient() {
+    this.nutrients.push(this.fb.group({
+      'type-id': ['', Validators.required],
+      quantity: [0, Validators.required]
+    }));
+  }
+
+  removeNutrient(index: number) { this.nutrients.removeAt(index); }
+
   onSubmit(): void {
     if (this.nuevaRecetaForm.invalid) {
-      alert('Por favor, completa todos los campos requeridos.');
-      this.nuevaRecetaForm.markAllAsTouched();
+      alert('Por favor, completa todos los campos requeridos (mínimo 1 ingrediente y 1 paso).');
       return;
     }
-    
-    // 1. Generar ID y actualizar el control 
-    this.contador++;
-    const nuevoId = 'R' + this.contador;
 
-    // 2. Obtener los valores crudos del formulario
-    const formValues = this.nuevaRecetaForm.value;
+    const payload = this.nuevaRecetaForm.value;
+    // Asegurar que el type-id sea número
+    payload['type-id'] = Number(payload['type-id']);
 
-    // 3. Crear el objeto final que coincide con RecetaModel
-    const nuevaReceta: RecetaModel = {
-      id: nuevoId,
-      titulo: formValues.titulo!, //Poner ! al final para permitir nulos
-      foto: formValues.foto as string,
-      categoria: formValues.categoria!, 
-  
-      ingredientes: (formValues.ingredientes ?? '')
-        .split(/[\n,]+/)
-        .map(i => i.trim()) 
-        .filter(i => i.length > 0)
-      ,
-      puntuacion: 0,
-      votos: 0
-    };
-
-    this.recetasService.crearReceta(nuevaReceta);
-
-    console.log(`¡Receta "${nuevaReceta.titulo}" creada con éxito! ID: ${nuevoId}`);
-    
+    this.recetasService.crearReceta(payload);
+    alert('Receta creada con éxito');
     this.nuevaRecetaForm.reset();
-    this.imagenPreview = null;
+    // Limpiar arrays
+    while (this.ingredients.length) this.ingredients.removeAt(0);
+    while (this.steps.length) this.steps.removeAt(0);
+    while (this.nutrients.length) this.nutrients.removeAt(0);
   }
 }
 
