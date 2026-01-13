@@ -1,0 +1,71 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import '@ionic/angular/css/palettes/dark.system.css';
+
+:root {
+  --ion-color-primary: #a8dadc;
+  --ion-color-primary-rgb: 168, 218, 220;
+  --ion-color-primary-contrast: #333;
+  --ion-color-primary-contrast-rgb: 51, 51, 51;
+  --ion-color-primary-shade: #94c0c2;
+  --ion-color-primary-tint: #b1dedf;
+
+  --ion-color-secondary: #f4a261;
+  --ion-color-tertiary: #e9c46a;
+  
+  --ion-background-color: #f8f9fa;
+  --ion-font-family: 'Outfit', 'Inter', sans-serif;
+}
+
+body {
+  font-family: var(--ion-font-family);
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+}
+
+.empty-state, .loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+  color: #888;
+}
+
+ion-content {
+  --background: transparent;
+}
