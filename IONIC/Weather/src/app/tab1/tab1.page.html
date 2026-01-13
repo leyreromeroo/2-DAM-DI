@@ -1,0 +1,35 @@
+<ion-content [fullscreen]="true">
+  <app-weather-page-template>
+    
+    <div header>
+      <app-search-bar 
+        (search)="onSearch($event)" 
+        (location)="getCurrentLocationWeather()">
+      </app-search-bar>
+    </div>
+
+    <div current>
+      <app-current-weather-card 
+        *ngIf="weatherData" 
+        [weather]="weatherData"
+        [cityName]="cityName">
+      </app-current-weather-card>
+      
+      <div *ngIf="!weatherData && !loading" class="empty-state">
+        <p>No weather data available. Try searching for a city!</p>
+      </div>
+
+      <div *ngIf="loading" class="loading-state">
+        <ion-spinner name="bubbles"></ion-spinner>
+      </div>
+    </div>
+
+    <div forecast>
+      <app-forecast-list 
+        *ngIf="weatherData" 
+        [weather]="weatherData">
+      </app-forecast-list>
+    </div>
+
+  </app-weather-page-template>
+</ion-content>

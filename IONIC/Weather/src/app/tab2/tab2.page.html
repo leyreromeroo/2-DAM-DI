@@ -1,0 +1,43 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>{{ 'TAB_FORECAST' | translate }}</ion-title>
+    <ion-note slot="secondary" *ngIf="cityName$ | async as city" style="margin-right: 15px;">{{ city }}</ion-note>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="forecast-container" *ngIf="weather$ | async as weather; else noData">
+    <div class="header-card">
+      <h2>{{ 'TAB_FORECAST' | translate }}</h2>
+      <p>{{ weather.daily.length }} {{ 'DAYS' | translate }}</p>
+    </div>
+
+    <ion-list lines="none" class="forecast-list">
+      <ion-item *ngFor="let day of weather.daily" class="forecast-item">
+        <div class="day-info">
+          <span class="day-name">{{ day.dt * 1000 | date:'EEEE' }}</span>
+          <span class="day-date">{{ day.dt * 1000 | date:'d MMM' }}</span>
+        </div>
+
+        <app-weather-icon [condition]="day.weather[0].main" size="2.5rem" slot="start"></app-weather-icon>
+
+        <div class="weather-desc">
+          {{ day.weather[0].description }}
+        </div>
+
+        <div class="temp-range" slot="end">
+          <app-temp-display [temp]="day.temp.max" size="small" class="max"></app-temp-display>
+          <app-temp-display [temp]="day.temp.min" size="small" class="min"></app-temp-display>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <ng-template #noData>
+    <div class="empty-state">
+      <ion-icon name="cloud-offline-outline" size="large"></ion-icon>
+      <p>{{ 'NO_DATA_AVAILABLE' | translate }}</p>
+      <p class="small">{{ 'SEARCH_FOR_CITY_FIRST' | translate }}</p>
+    </div>
+  </ng-template>
+</ion-content>

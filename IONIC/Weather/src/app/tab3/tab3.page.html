@@ -1,0 +1,50 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>{{ 'TAB_SETTINGS' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="settings-container">
+    <div class="profile-section">
+      <div class="avatar">
+        <ion-icon name="heart" color="secondary"></ion-icon>
+      </div>
+      <h2>{{ 'APP_TITLE' | translate }}</h2>
+      <p>v1.0.0 Refined</p>
+    </div>
+
+    <ion-list lines="inset" class="custom-list">
+      <ion-item>
+        <ion-icon slot="start" name="language-outline" color="primary"></ion-icon>
+        <ion-label>
+          <h3>{{ 'SETTINGS_LANGUAGE' | translate }}</h3>
+          <p>{{ (currentLang === 'es' ? 'Spanish' : 'English') }}</p>
+        </ion-label>
+        <ion-toggle [checked]="isEn()" (ionChange)="toggleLanguage($event)" slot="end"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon slot="start" name="options-outline" color="primary"></ion-icon>
+        <ion-label>
+          <h3>{{ 'SETTINGS_UNITS' | translate }}</h3>
+          <p>{{ 'METRIC' | translate }}</p>
+        </ion-label>
+        <ion-note slot="end">FIXED</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon slot="start" name="information-circle-outline" color="primary"></ion-icon>
+        <ion-label>
+          <h3>{{ 'API_KEY_STATUS' | translate }}</h3>
+          <p>Active / Key Provided</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <div class="info-card">
+      <ion-icon name="information-circle-outline" color="secondary" size="large"></ion-icon>
+      <p>This application was built with Atomic Design and Ionic/Angular for a premium weather experience.</p>
+    </div>
+  </div>
+</ion-content>

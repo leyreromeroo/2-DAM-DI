@@ -1,0 +1,86 @@
+.settings-container {
+    padding: 20px;
+}
+
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    font-size: 2.5rem;
+}
+
+.profile-section h2 {
+    margin: 0;
+    font-weight: 700;
+    color: #333;
+}
+
+.profile-section p {
+    margin: 5px 0 0;
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.custom-list {
+    background: transparent;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+ion-item {
+    --background: rgba(255, 255, 255, 0.3);
+    --padding-start: 15px;
+    margin-bottom: 1px;
+}
+
+ion-label h3 {
+    font-weight: 600;
+    color: #444;
+}
+
+ion-label p {
+    color: #888;
+}
+
+.info-card {
+    padding: 20px;
+    background: rgba(244, 162, 97, 0.1);
+    /* secondary color faint */
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 1px dashed var(--ion-color-secondary);
+}
+
+.info-card p {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-top: 10px;
+}
+
+ion-toolbar {
+    --background: transparent;
+    --border-width: 0;
+}
