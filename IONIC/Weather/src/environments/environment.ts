@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   fallbackLang: 'es', // Added and renamed from defaultLanguage
-  openWeatherApiKey: 'ab079af1d23e9a970ca11cc3705cb186',
+  openWeatherApiKey: '651379d84c7bc2eb301a2c1f549eb037',
   openWeatherApiUrl: 'https://api.openweathermap.org/data/3.0', // Already https
   openWeatherGeocodingUrl: 'https://api.openweathermap.org/geo/1.0' // Already https
 };
