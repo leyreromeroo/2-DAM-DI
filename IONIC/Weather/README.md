@@ -1,60 +1,52 @@
-# Weather is Sweet (El Tiempo es Dulce) 🌦️
+# Weather is Sweet (El Tiempo es Dulce)
 
-A minimalist, "coqueto" weather application built with Ionic, Angular, and OpenWeather API.
+Una aplicacion meteorologica minimalista y elegante construida con Ionic, Angular y la API de OpenWeather.
 
-## Features
-- **Atomic Design**: Organized into Atoms, Molecules, Organisms, and Templates.
-- **SOLID Architecture**: Refactored codebase with a strong focus on Single Responsibility Principle (SRP).
-- **Modern UI**: Clean, pastel-colored design with smooth transitions and glassmorphism.
-- **Search & Geolocation**: Search for any city or use your current location.
-- **Interactive Map**: View weather conditions on a dynamic map.
-- **Multi-language**: Fully localized in English and Spanish.
-- **Responsive**: Optimized for both Android and Web.
-- **Comprehensive Data**:
-    - Current weather details (Temp, Wind, UV Index, Humidity, etc.)
-    - Hourly forecast for the next 24 hours.
-    - 5-day daily forecast.
+## Funcionalidades
+- Diseno Atomico: Organizado en Atomos, Moleculas, Organismos y Plantillas.
+- Arquitectura SOLID: Codigo refactorizado siguiendo el Principio de Responsabilidad Unica (SRP).
+- Interfaz Moderna: Diseno limpio con tonos pastel, transiciones suaves y efectos de glassmorphism.
+- Busqueda y Geolocalizacion: Busqueda por nombre de ciudad o mediante la ubicacion actual del dispositivo.
+- Mapa Interactivo: Visualizacion dinamica de las condiciones climaticas en un mapa.
+- Multi-idioma: Localizacion completa en Inglés y Castellano.
+- Adaptable: Optimizado para funcionamiento en Android y Web.
+- Datos Detallados:
+    - Informacion actual (Temperatura, Viento, Indice UV, Humedad, etc.).
+    - Prediccion por horas para las proximas 24 horas (con grafico visual).
+    - Prediccion diaria para 5 dias (incluyendo el actual).
 
-## Technical Stack
-- **Framework**: Ionic Framework (Standalone Components)
-- **Core**: Angular with SOLID Principles
-- **API**: OpenWeather (One Call 3.0, Geocoding)
-- **i18n**: @ngx-translate/core
-- **Icons**: Ionicons
+## Stack Tecnico
+- Framework: Ionic Framework (Componentes Standalone)
+- Nucleo: Angular con principios SOLID
+- API: OpenWeather (One Call 3.0, Geocoding)
+- i18n: @ngx-translate/core
+- Iconos: Ionicons
 
-### Architecture (SOLID)
-The application follows a strict separation of concerns:
-- **`WeatherApiService`**: Handles all HTTP communication with OpenWeatherMap.
-- **`WeatherTransformationService`**: Pure logic service for transforming raw JSON into application models (`WeatherData`).
-- **`WeatherService`**: State management and orchestration facade.
-- **`GeolocationService`**: Manages device permissions and coordinates.
+### Arquitectura (SOLID)
+La aplicacion sigue una separacion estricta de responsabilidades:
+- WeatherApiService: Gestiona exclusivamente la comunicacion HTTP con OpenWeatherMap.
+- WeatherTransformationService: Servicio de logica pura para transformar el JSON crudo en los modelos de la aplicacion (WeatherData).
+- WeatherService: Fachada para la gestion de estado y orquestacion entre servicios.
+- GeolocationService: Gestiona permisos y coordenadas del dispositivo.
 
-## Setup for Developers
-1. **Clone the repository**:
-   ```bash
-   git clone [repo-url]
+## Configuracion para Desarrolladores
+1. Clonar el repositorio:
+   git clone [url-del-repo]
    cd Weather
-   ```
-2. **Install dependencies**:
-   ```bash
+2. Instalar dependencias:
    npm install
-   ```
-3. **Configure API Key**:
-   Open `src/environments/environment.ts` and replace `YOUR_API_KEY_HERE` with your OpenWeather API Key.
-   > [!IMPORTANT]
-   > Ensure your API key has access to the **One Call 3.0** endpoint.
-
-4. **Run the app**:
-   ```bash
+3. Configurar la Clave de API:
+   Abrir src/environments/environment.ts y reemplazar 'YOUR_API_KEY_HERE' con su clave de OpenWeather API.
+   Importante: Asegurese de que su clave tenga acceso al endpoint One Call 3.0.
+4. Ejecutar la aplicacion:
    ionic serve
-   ```
 
-## Design System (Atomic Design)
-- **Atoms**: `weather-icon`, `temp-display`
-- **Molecules**: `search-bar`, `weather-detail`
-- **Organisms**: `current-weather-card`, `forecast-list`, `weather-map`
-- **Templates**: `weather-page-template`
+## Sistema de Diseno (Diseno Atomico)
+- Atomos: weather-icon, temp-display
+- Moleculas: search-bar, weather-detail
+- Organismos: current-weather-card, forecast-list, weather-map
+- Plantillas: weather-page-template
 
-## Screenshots
-![Design Mockup](./weather_app_design_mockup.png)
-The design mockup is available in the repository root as `weather_app_design_mockup.png`.
+## Capturas de Pantalla
+![Diseno Mockup](./weather_app_design_mockup.png)
+El diseno previo de la herramienta se encuentra en la raiz del repositorio como weather_app_design_mockup.png.
