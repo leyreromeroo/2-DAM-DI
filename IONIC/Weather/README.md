@@ -56,4 +56,5 @@ The application follows a strict separation of concerns:
 - **Templates**: `weather-page-template`
 
 ## Screenshots
+![Design Mockup](./weather_app_design_mockup.png)
 The design mockup is available in the repository root as `weather_app_design_mockup.png`.
