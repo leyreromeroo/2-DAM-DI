@@ -49,6 +49,14 @@ export const getMockWeather = (lang: string = 'es'): WeatherData => ({
                 description: lang === 'es' ? (i % 3 === 0 ? 'lluvia ligera' : 'cielo claro') : (i % 3 === 0 ? 'light rain' : 'clear sky'),
                 icon: i % 3 === 0 ? '10d' : '01d'
             }
-        ]
+        ],
+        hourly: Array.from({ length: 8 }).map((_, hIndex) => ({
+            dt: (Date.now() / 1000) + (i * 86400) + (hIndex * 10800),
+            temp: 20 + Math.random() * 5,
+            weather: [{ id: 800, main: 'Clear', description: 'clear', icon: '01d' }],
+            pop: 0,
+            wind_speed: 10,
+            wind_deg: 200
+        }))
     }))
 });

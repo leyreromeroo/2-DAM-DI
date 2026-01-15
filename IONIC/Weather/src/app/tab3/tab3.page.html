@@ -7,8 +7,9 @@
 <ion-content [fullscreen]="true">
   <div class="settings-container">
     <div class="profile-section">
-      <div class="avatar">
-        <ion-icon name="heart" color="secondary"></ion-icon>
+      <div class="avatar" style="background: transparent;">
+        <ion-icon name="partly-sunny"
+          style="font-size: 5rem; color: #a8dadc; filter: drop-shadow(0 0 10px rgba(168,218,220,0.5));"></ion-icon>
       </div>
       <h2>{{ 'APP_TITLE' | translate }}</h2>
       <p>v1.0.0 Refined</p>
@@ -41,10 +42,5 @@
         </ion-label>
       </ion-item>
     </ion-list>
-
-    <div class="info-card">
-      <ion-icon name="information-circle-outline" color="secondary" size="large"></ion-icon>
-      <p>This application was built with Atomic Design and Ionic/Angular for a premium weather experience.</p>
-    </div>
   </div>
 </ion-content>

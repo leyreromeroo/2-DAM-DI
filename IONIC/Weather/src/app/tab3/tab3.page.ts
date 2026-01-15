@@ -14,7 +14,7 @@ import {
 } from '@ionic/angular/standalone';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { addIcons } from 'ionicons';
-import { languageOutline, optionsOutline, informationCircleOutline, openOutline, heart } from 'ionicons/icons';
+import { languageOutline, optionsOutline, informationCircleOutline, openOutline, heart, partlySunny } from 'ionicons/icons';
 
 @Component({
   selector: 'app-tab3',
@@ -38,13 +38,8 @@ import { languageOutline, optionsOutline, informationCircleOutline, openOutline,
 })
 export class Tab3Page {
   constructor(private translate: TranslateService) {
-    addIcons({
-      'language-outline': languageOutline,
-      'options-outline': optionsOutline,
-      'information-circle-outline': informationCircleOutline,
-      'open-outline': openOutline,
-      'heart': heart
-    });
+    // Clean addIcons call with no duplicates
+    addIcons({ partlySunny, languageOutline, optionsOutline, informationCircleOutline, openOutline, heart });
   }
 
   get currentLang(): string {

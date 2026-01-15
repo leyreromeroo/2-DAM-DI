@@ -7,16 +7,16 @@ import { WeatherData } from '../../../../core/models/weather.model';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-    selector: 'app-current-weather-card',
-    standalone: true,
-    imports: [
-        CommonModule,
-        WeatherIconComponent,
-        TempDisplayComponent,
-        WeatherDetailComponent,
-        TranslateModule
-    ],
-    template: `
+  selector: 'app-current-weather-card',
+  standalone: true,
+  imports: [
+    CommonModule,
+    WeatherIconComponent,
+    TempDisplayComponent,
+    WeatherDetailComponent,
+    TranslateModule
+  ],
+  template: `
     <div class="card-container" *ngIf="weather">
       <div class="header">
         <h1 class="city">{{ cityName }}</h1>
@@ -24,10 +24,18 @@ import { TranslateModule } from '@ngx-translate/core';
       </div>
 
       <div class="main-info">
-        <app-weather-icon [condition]="weather.current.weather[0].main" size="6rem"></app-weather-icon>
+        <app-weather-icon [condition]="weather.current.weather[0].main" [code]="weather.current.weather[0].id" size="6rem" [animated]="true"></app-weather-icon>
         <div class="temp-section">
           <app-temp-display [temp]="weather.current.temp" size="large"></app-temp-display>
           <span class="description">{{ weather.current.weather[0].description }}</span>
+          
+          <div class="high-low" *ngIf="weather.daily && weather.daily[0]">
+            <span class="label">Max</span>
+            <app-temp-display [temp]="weather.daily[0].temp.max" size="small"></app-temp-display>
+            <span class="divider"></span>
+            <span class="label">Min</span>
+            <app-temp-display [temp]="weather.daily[0].temp.min" size="small" style="opacity: 0.7"></app-temp-display>
+          </div>
         </div>
       </div>
 
@@ -58,57 +66,88 @@ import { TranslateModule } from '@ngx-translate/core';
       </div>
     </div>
   `,
-    styles: [`
+  styles: [`
     .card-container {
-      padding: 20px;
-      margin: 10px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.3) 100%);
-      backdrop-filter: blur(20px);
-      border-radius: 30px;
-      border: 1px solid rgba(255,255,255,0.5);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+      padding: 25px;
+      margin: 15px;
+      /* More substantial glass effect */
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-radius: 35px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 15px 35px rgba(0, 50, 100, 0.1);
     }
     .header {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
     .city {
-      font-size: 1.8rem;
-      font-weight: 700;
+      font-size: 2rem;
+      font-weight: 800;
       margin: 0;
-      color: #333;
+      letter-spacing: -0.5px;
+      color: #1a1a1a;
+      background: linear-gradient(45deg, #1a1a1a, #4a4a4a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .date {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: #666;
-      margin: 5px 0 0;
+      margin: 8px 0 0;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 600;
     }
     .main-info {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 30px;
+      margin-bottom: 35px;
+      position: relative;
     }
     .temp-section {
       text-align: center;
       margin-top: -10px;
     }
+    /* We assume app-temp-display handles the font size of the number, 
+       but we can target it deeply or just let it be. 
+       Let's style the description nicely. */
     .description {
-      display: block;
-      font-size: 1.2rem;
+      display: inline-block;
+      font-size: 1.1rem;
       text-transform: capitalize;
+      color: #444;
+      font-weight: 500;
+      margin-top: 5px;
+      padding: 6px 16px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    }
+    .high-low {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .label {
+      font-size: 0.9rem;
+      font-weight: 600;
       color: #555;
-      font-weight: 400;
-      margin-top: -5px;
+      text-transform: uppercase;
+      margin-right: 2px;
     }
     .details-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      gap: 15px;
     }
   `]
 })
 export class CurrentWeatherCardComponent {
-    @Input() weather?: WeatherData;
-    @Input() cityName: string = '';
+  @Input() weather?: WeatherData;
+  @Input() cityName: string = '';
 }

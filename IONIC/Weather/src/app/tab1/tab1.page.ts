@@ -39,9 +39,10 @@ export class Tab1Page implements OnInit {
   ngOnInit() {
     this.getCurrentLocationWeather();
 
-    this.translate.onLangChange.subscribe(() => {
-      if (this.weatherData) {
-        this.fetchWeather(this.weatherData.lat || 0, this.weatherData.lon || 0);
+    this.translate.onLangChange.subscribe((event) => {
+      if (this.weatherData && this.weatherData.lat && this.weatherData.lon) {
+        // Re-fetch weather with the new language
+        this.fetchWeather(this.weatherData.lat, this.weatherData.lon, true);
       } else {
         this.loadMockData('Language changed');
       }
@@ -54,12 +55,25 @@ export class Tab1Page implements OnInit {
       const hasPermission = await this.geoService.checkPermissions();
       if (hasPermission) {
         const position = await this.geoService.getCurrentPosition();
-        this.cityName = 'My Location'; // Or get from reverse geocoding if needed
-        this.fetchWeather(position.coords.latitude, position.coords.longitude);
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        // Try to get detailed city name first
+        this.weatherService.getCityByCoordinates(lat, lon).subscribe({
+          next: (results) => {
+            let name = 'My Location';
+            if (results && results.length > 0) {
+              name = this.formatBilingualName(results[0]);
+            }
+            this.cityName = name;
+            this.weatherService.setCityName(name);
+            this.fetchWeather(lat, lon, true); // true = preserve current name
+          },
+          error: () => this.fetchWeather(lat, lon)
+        });
       }
     } catch (error) {
       console.error('Error getting location', error);
-      // Fallback to a default city if location fails
       this.onSearch('Madrid');
     } finally {
       this.loading = false;
@@ -75,9 +89,9 @@ export class Tab1Page implements OnInit {
       next: (results) => {
         if (results.length > 0) {
           const location = results[0];
-          this.cityName = location.name;
+          this.cityName = this.formatBilingualName(location);
           this.weatherService.setCityName(this.cityName);
-          this.fetchWeather(location.lat, location.lon);
+          this.fetchWeather(location.lat, location.lon, true);
         } else {
           this.loadMockData('City not found, showing mock data');
         }
@@ -90,12 +104,21 @@ export class Tab1Page implements OnInit {
     });
   }
 
-  fetchWeather(lat: number, lon: number) {
+  fetchWeather(lat: number, lon: number, preserveName: boolean = false) {
     this.weatherService.getWeather(lat, lon, this.translate.currentLang).subscribe({
       next: (data) => {
         data.lat = lat;
         data.lon = lon;
         this.weatherData = data;
+
+        if (!preserveName && data.name) {
+          this.cityName = data.name;
+          this.weatherService.setCityName(this.cityName);
+        } else if (preserveName) {
+          // Ensure data also carries the preserved name if needed by other components
+          data.name = this.cityName;
+        }
+
         this.weatherService.setWeatherData(data);
       },
       error: (err) => {
@@ -103,6 +126,19 @@ export class Tab1Page implements OnInit {
         this.loadMockData('API error, showing mock data');
       }
     });
+  }
+
+  private formatBilingualName(location: any): string {
+    if (location.local_names) {
+      const es = location.local_names.es;
+      const eu = location.local_names.eu;
+      if (es && eu && es !== eu) {
+        return `${es} / ${eu}`;
+      }
+      if (es) return es;
+      if (eu) return eu;
+    }
+    return location.name;
   }
 
   loadMockData(reason: string) {

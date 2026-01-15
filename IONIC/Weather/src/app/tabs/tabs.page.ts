@@ -1,7 +1,7 @@
 import { Component, EnvironmentInjector, inject } from '@angular/core';
 import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { partlySunnyOutline, calendarOutline, settingsOutline } from 'ionicons/icons';
+import { partlySunnyOutline, settingsOutline, mapOutline, cloudOutline } from 'ionicons/icons';
 
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -16,10 +16,6 @@ export class TabsPage {
   public environmentInjector = inject(EnvironmentInjector);
 
   constructor() {
-    addIcons({
-      'partly-sunny-outline': partlySunnyOutline,
-      'calendar-outline': calendarOutline,
-      'settings-outline': settingsOutline
-    });
+    addIcons({ cloudOutline, mapOutline, settingsOutline, partlySunnyOutline });
   }
 }

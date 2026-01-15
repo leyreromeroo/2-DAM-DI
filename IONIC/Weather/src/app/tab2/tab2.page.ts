@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel, IonNote, IonIcon } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
 import { WeatherService } from '../core/services/weather.service';
 import { TranslateModule } from '@ngx-translate/core';
-import { WeatherIconComponent } from '../shared/components/atoms/weather-icon/weather-icon.component';
-import { TempDisplayComponent } from '../shared/components/atoms/temp-display/temp-display.component';
-import { addIcons } from 'ionicons';
-import { cloudOfflineOutline } from 'ionicons/icons';
+import { WeatherMapComponent } from '../shared/components/organisms/weather-map/weather-map.component'; // Import Map
 
 @Component({
   selector: 'app-tab2',
@@ -19,20 +16,12 @@ import { cloudOfflineOutline } from 'ionicons/icons';
     IonToolbar,
     IonTitle,
     IonContent,
-    IonList,
-    IonItem,
-    IonNote,
-    IonIcon,
     TranslateModule,
-    WeatherIconComponent,
-    TempDisplayComponent
+    WeatherMapComponent
   ]
 })
 export class Tab2Page {
   weather$ = this.weatherService.weatherData$;
-  cityName$ = this.weatherService.cityName$;
 
-  constructor(private weatherService: WeatherService) {
-    addIcons({ 'cloud-offline-outline': cloudOfflineOutline });
-  }
+  constructor(private weatherService: WeatherService) { }
 }

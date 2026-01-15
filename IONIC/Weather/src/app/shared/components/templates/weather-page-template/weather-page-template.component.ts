@@ -31,9 +31,9 @@ import { CommonModule } from '@angular/common';
       overflow-y: auto;
     }
     .header {
-      position: sticky;
-      top: 0;
+      width: 100%;
       z-index: 100;
+      /* position: sticky removed to scroll with content */
     }
     .content-wrapper {
       display: flex;
@@ -42,22 +42,28 @@ import { CommonModule } from '@angular/common';
     }
     
     /* Responsive layout for Web */
-    @media (min-width: 768px) {
+    @media (min-width: 900px) {
       .content-wrapper {
         flex-direction: row;
-        padding: 40px 20px;
-        max-width: 1100px;
+        padding: 40px;
+        max-width: 1400px;
         margin: 0 auto;
-        gap: 30px;
+        gap: 40px;
         justify-content: center;
+        align-items: flex-start;
       }
       .main-column {
-        flex: 1.2;
-        max-width: 500px;
+        flex: 1;
+        max-width: 480px;
+        position: sticky;
+        top: 100px;
       }
       .forecast-column {
-        flex: 1;
-        max-width: 400px;
+        flex: 1.5;
+        max-width: 650px;
+        /* Remove padding bottom since internal list handles scroll now if needed, 
+           but keep some for safety */
+        padding-bottom: 20px; 
       }
     }
   `]

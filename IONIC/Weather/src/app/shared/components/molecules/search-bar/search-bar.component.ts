@@ -42,7 +42,7 @@ import { LanguageToggleComponent } from '../../atoms/language-toggle/language-to
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 15px 15px 5px;
+      padding: 5px 10px; /* Reduced padding */
       width: 100%;
       max-width: 800px;
       margin: 0 auto;
@@ -55,14 +55,17 @@ import { LanguageToggleComponent } from '../../atoms/language-toggle/language-to
       backdrop-filter: blur(15px);
       border-radius: 20px;
       border: 1px solid rgba(255, 255, 255, 0.5);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03); /* Lighter shadow */
+      height: 48px; /* Force slightly smaller height */
     }
     .custom-search {
       --background: transparent;
       --box-shadow: none;
       --border-radius: 15px;
-      padding: 0;
+      padding-top: 0;
+      padding-bottom: 0;
       flex: 1;
+      height: 100%;
     }
     .location-btn {
       --color: var(--ion-color-primary-shade);

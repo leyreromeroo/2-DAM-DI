@@ -15,23 +15,12 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.translate.onLangChange.subscribe(() => {
-      this.updateTitle();
-    });
-    // Set initial title
-    this.updateTitle();
+    this.translate.setDefaultLang('es');
+    this.translate.use('es');
+
+    // Set static proprietary title
+    this.titleService.setTitle('WeatherApp');
   }
 
-  updateTitle() {
-    this.translate.get('APP_TITLE').subscribe((res: string) => {
-      // Only set the title if it's not the key itself
-      if (res && res !== 'APP_TITLE') {
-        this.titleService.setTitle(res);
-      } else {
-        // Fallback based on current language if translation not ready
-        const fallback = this.translate.currentLang === 'es' ? 'Tiempo' : 'Weather';
-        this.titleService.setTitle(fallback);
-      }
-    });
-  }
+  // updateTitle removed as it is no longer needed for dynamic translation
 }

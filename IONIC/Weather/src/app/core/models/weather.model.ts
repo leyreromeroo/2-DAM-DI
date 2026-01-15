@@ -1,4 +1,5 @@
 export interface WeatherData {
+    name?: string;
     lat?: number;
     lon?: number;
     current: CurrentWeather;
@@ -37,6 +38,7 @@ export interface DailyForecast {
     weather: WeatherCondition[];
     uvi: number;
     pop: number;
+    hourly: HourlyForecast[];
 }
 
 export interface WeatherCondition {
@@ -52,4 +54,5 @@ export interface CityResult {
     lon: number;
     country: string;
     state?: string;
+    local_names?: { [key: string]: string };
 }

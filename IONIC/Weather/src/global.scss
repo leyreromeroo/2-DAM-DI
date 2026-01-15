@@ -11,6 +11,7 @@
 
 /* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
+@import "leaflet/dist/leaflet.css";
 
 /* Basic CSS for apps built with Ionic */
 @import "@ionic/angular/css/normalize.css";
@@ -46,7 +47,7 @@
 
   --ion-color-secondary: #f4a261;
   --ion-color-tertiary: #e9c46a;
-  
+
   --ion-background-color: #f8f9fa;
   --ion-font-family: 'Outfit', 'Inter', sans-serif;
 }
@@ -56,7 +57,8 @@ body {
   background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
 }
 
-.empty-state, .loading-state {
+.empty-state,
+.loading-state {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -68,4 +70,23 @@ body {
 
 ion-content {
   --background: transparent;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
 }
