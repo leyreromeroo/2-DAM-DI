@@ -3,58 +3,50 @@
 Una **aplicación meteorológica** minimalista y elegante construida con **Ionic**, **Angular** y la **API de OpenWeather**.
 
 ## Funcionalidades
-- **Diseño Atómico**: Organizado en **Átomos**, **Moléculas**, **Organismos** y **Plantillas**.
-- **Arquitectura SOLID**: Código refactorizado siguiendo el **Principio de Responsabilidad Única (SRP)**.
-- **Interfaz Moderna**: Diseño limpio con tonos **pastel**, transiciones suaves y efectos de **glassmorphism**.
-- **Búsqueda y Geolocalización**: Búsqueda por **nombre de ciudad** o mediante la **ubicación actual** del dispositivo.
-- **Mapa Interactivo**: Visualización dinámica de las condiciones climáticas en un **mapa**.
-- **Multi-idioma**: Localización completa en **Inglés** y **Castellano**.
-- **Adaptable**: Optimizado para funcionamiento en **Android** y **Web**.
-- **Datos Detallados**:
-    - Información actual (**Temperatura**, **Viento**, **Índice UV**, **Humedad**, etc.).
-    - Predicción por horas para las próximas **24 horas** (con gráfico visual).
-    - Predicción diaria para **5 días** (incluyendo el actual).
+- **Diseño Atómico**: Estructura organizada en **Átomos**, **Moléculas**, **Organismos** y **Plantillas** para una máxima modularidad.
+- **Arquitectura SOLID**: Código refactorizado siguiendo estrictamente el **Principio de Responsabilidad Única (SRP)**.
+- **Interfaz Moderna**: Estética limpia con tonos **pastel**, transiciones fluidas y efectos de **glassmorphism**.
+- **Búsqueda y Geolocalización**: Permite buscar por **nombre de ciudad** o detectar la **ubicación actual** del usuario.
+- **Mapa Interactivo**: Visualización de las condiciones meteorológicas mediante un **mapa dinámico**.
+- **Sistema Multi-idioma**: Soporte completo y conmutación en tiempo real entre **Inglés** y **Castellano**.
+- **Diseño Adaptable**: Interfaz optimizada para una experiencia nativa tanto en **Android** como en entornos **Web**.
+- **Datos Completos**:
+    - Información meteorológica en tiempo real (**Temperatura**, **Viento**, **Índice UV**, **Humedad**, etc.).
+    - Predicción detallada por horas para las próximas **24 horas** con representación gráfica.
+    - Predicción diaria extendida para **5 días**.
 
 ## Stack Técnico
-- **Framework**: **Ionic Framework** (Componentes Standalone)
-- **Núcleo**: **Angular** con principios **SOLID**
-- **API**: **OpenWeather** (One Call 3.0, Geocoding)
-- **i18n**: **ngx-translate**
-- **Iconos**: **Ionicons**
+- **Framework**: **Ionic Framework** utilizando **Componentes Standalone**.
+- **Núcleo de Lógica**: **Angular** implementado con principios **SOLID**.
+- **Proveedor de Datos**: **OpenWeather** (APIs de One Call 3.0 y Geocoding).
+- **Internacionalización**: **ngx-translate**.
+- **Iconografía**: **Ionicons**.
 
-### Arquitectura (SOLID)
-La aplicación sigue una **separación estricta** de responsabilidades:
-- **WeatherApiService**: Gestiona exclusivamente la comunicación **HTTP** con **OpenWeatherMap**.
-- **WeatherTransformationService**: Servicio de **lógica pura** para transformar el **JSON** crudo en los modelos de la aplicación (**WeatherData**).
-- **WeatherService**: Fachada para la **gestión de estado** y orquestación entre servicios.
-- **GeolocationService**: Gestiona **permisos** y **coordenadas** del dispositivo.
+### Arquitectura de Servicios (SOLID)
+El sistema se ha dividido para cumplir con la **separación de responsabilidades**:
+- **WeatherApiService**: Encargado exclusivamente de las peticiones **HTTP**.
+- **WeatherTransformationService**: Servicio dedicado a la **transformación de datos** y lógica de negocio.
+- **WeatherService**: Actúa como **fachada** para la gestión del **estado** y la coordinación.
+- **GeolocationService**: Gestiona de forma aislada los **permisos** y la obtención de **coordenadas**.
 
 ## Configuración para Desarrolladores
-1. **Clonar** el repositorio:
-   git clone [url-del-repo]
+1. **Clonación** del proyecto:
+   git clone [url-del-repositorio]
    cd Weather
-2. **Instalar** dependencias:
+2. **Instalación** de dependencias:
    npm install
-3. **Configurar** la Clave de API:
-   Abrir **src/environments/environment.ts** y reemplazar 'YOUR_API_KEY_HERE' con su clave de **OpenWeather API**.
-   **Importante**: Asegúrese de que su clave tenga acceso al endpoint **One Call 3.0**.
-4. **Ejecutar** la aplicación:
-   ionic serve
+3. **Configuración de la API**:
+   Localice el archivo **src/environments/environment.ts** y asigne su código personal a la variable de la **API de OpenWeather**.
+   **Nota**: Asegúrese de que su suscripción incluya el endpoint **One Call 3.0**.
+4. **Lanzamiento**:
+   Para desarrollo local, ejecute: **ionic serve**.
 
 ## Sistema de Diseño (Atomic Design)
-- **Átomos**: weather-icon, temp-display
-- **Moléculas**: search-bar, weather-detail
-- **Organismos**: current-weather-card, forecast-list, weather-map
-- **Plantillas**: weather-page-template
+- **Átomos**: weather-icon, temp-display.
+- **Moléculas**: search-bar, weather-detail.
+- **Organismos**: current-weather-card, forecast-list, weather-map.
+- **Plantillas**: weather-page-template.
 
-## Capturas de Pantalla
-### Vista General
-![Escritorio](./screenshot_desktop.png)
-
-### Detalles y Predicción
-![Detalle](./screenshot_current.png)
-![Por Horas](./screenshot_hourly.png)
-
-### Mapa y Ajustes
-![Mapa](./screenshot_map.png)
-![Ajustes](./screenshot_settings.png)
+## Galería de Diseño
+![Captura de pantalla de la aplicación](./weather_app_design_mockup.png)
+El diseño previo y la previsualización de la herramienta están disponibles en la raíz del repositorio.
