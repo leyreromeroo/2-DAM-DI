@@ -72,12 +72,15 @@ ion-content {
   --background: transparent;
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar - Hidden per user request */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  display: none;
+  width: 0;
+  height: 0;
 }
 
+/* Redundant rules for hidden scrollbar */
+/*
 ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.05);
 }
@@ -90,3 +93,4 @@ ion-content {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 0, 0, 0.3);
 }
+*/
